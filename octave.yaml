@@ -1,0 +1,43 @@
+---
+layout: "package"
+permalink: "queueing/"
+description: >-
+  The queueing package provides functions for queueing
+  networks and Markov chains analysis. This package can be used to
+  compute steady-state performance measures for open, closed and mixed
+  networks with single or multiple job classes. Mean Value Analysis
+  (MVA), convolution, and various bounding techniques are
+  implemented. Furthermore, several transient and steady-state
+  performance measures for Markov chains can be computed, such as state
+  occupancy probabilities, mean time to absorption, time-averaged
+  sojourn times and so forth. Discrete- and continuous-time Markov
+  chains are supported.
+icon:
+links:
+- icon: "far fa-copyright"
+  label: "GPL-3.0-or-later"
+  url: "https://github.com/gnu-octave/queueing/blob/main/COPYING"
+- icon: "fas fa-rss"
+  label: "news"
+  url: "https://github.com/gnu-octave/queueing/releases/"
+- icon: "fas fa-code-branch"
+  label: "repository"
+  url: "https://github.com/gnu-octave/queueing/"
+- icon: "fas fa-book"
+  label: "package documentation"
+  url: "https://github.com/gnu-octave/queueing/blob/main/README.md"
+- icon: "fas fa-bug"
+  label: "report a problem"
+  url: "https://github.com/gnu-octave/queueing/issues"
+maintainers:
+- name: "Moreno Marzolla"
+  contact: "moreno.marzolla@unibo.it"
+versions:
+- id: "1.2.8"
+  date: "2024-06-13"
+  sha256: "bff441755f0d68596f2efd027fe637b5b6c52b722ffd6255bdb8a5f34ab4ef2a"
+  url: "https://github.com/gnu-octave/queueing/archive/1.2.8.tar.gz"
+  depends:
+  - "octave (>= 4.0.0)"
+  - "pkg"
+---

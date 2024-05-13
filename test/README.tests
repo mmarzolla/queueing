@@ -1,0 +1,20 @@
+Tests and demos are embedded with the source code of each function.
+To run the tests for a specific function, use the test() built-in
+command at the GNU Octave prompt. For example:
+
+octave:1> test("qsmm1");
+
+runs all tests for the qsmm1() function and shows the summary of
+successes/failures. To run all tests for all functions you can either
+use the runtests() built-in function, by specifying the full path where
+the m-files for the queueing package are stored:
+
+octave:2> runtests("/path/to/queueing/inst");
+
+or using the Makefile contained in this directory that provides a
+"check" target that runs all tests. From the top-level directory of
+the queueing package development tree, you can issue the following
+command at the Unix shell:
+
+make check
+

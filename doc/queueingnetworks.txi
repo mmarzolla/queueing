@@ -1,0 +1,1389 @@
+@c -*- texinfo -*-
+
+@c Copyright (C) 2008, 2009, 2010, 2011, 2012, 2014, 2016, 2018 Moreno Marzolla
+@c
+@c This file is part of the queueing package.
+@c
+@c The queueing package is free software; you can redistribute it
+@c and/or modify it under the terms of the GNU General Public License
+@c as published by the Free Software Foundation; either version 3 of
+@c the License, or (at your option) any later version.
+@c
+@c The queueing package is distributed in the hope that it will be
+@c useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+@c of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+@c GNU General Public License for more details.
+@c
+@c You should have received a copy of the GNU General Public License
+@c along with the queueing package; see the file COPYING.  If not, see
+@c <http://www.gnu.org/licenses/>.
+
+@node Queueing Networks
+@chapter Queueing Networks
+
+@menu
+* Introduction to QNs::             A brief introduction to Queueing Networks
+* Single Class Models::             Queueing models with a single job class
+* Multiple Class Models::           Queueing models with multiple job classes
+* Generic Algorithms::              High-level functions for QN analysis
+* Bounds Analysis::                 Computation of asymptotic performance bounds
+* QN Analysis Examples::            Queueing Networks analysis examples
+@end menu
+
+@cindex queueing networks
+
+@c
+@c INTRODUCTION
+@c
+@node Introduction to QNs
+@section Introduction to QNs
+
+Queueing Networks (QN) are a simple modeling notation that can be used
+to analyze many kinds of systems. In its simplest form, a QN is made
+of @math{K} service centers; center @math{k} has a queue connected to
+@math{m_k} (usually identical) servers. Arriving customers (requests)
+join the queue if there is at least one slot available. Requests are
+served according to a (de)queueing policy (e.g., FIFO). After service
+completes, requests leave the server and can join another queue or
+exit from the system.
+
+@cindex delay center
+@cindex infinite server
+
+Service centers where @math{m_k = \infty} are called @emph{delay
+centers} or @emph{infinite servers}. In this kind of centers, there is
+always one available server, so that queueing never occurs.
+
+Requests join the queue according to a @emph{queueing policy}, such as:
+
+@cindex First-Come-First-Served
+@cindex FCFS
+@cindex Last-Come-First-Served Preemptive Resume
+@cindex LCFS-PR
+@cindex Processor Sharing
+@cindex PS
+@cindex Infinite Server
+@cindex IS
+
+@table @strong
+
+@item FCFS
+First-Come-First-Served
+
+@item LCFS-PR
+Last-Come-First-Served, Preemptive Resume
+
+@item PS
+Processor Sharing
+
+@item IS
+Infinite Server (@math{m_k = \infty}).
+
+@end table
+
+Queueing networks can be @emph{open} or @emph{closed}. In open
+networks there is an infinite population of requests; new customers
+are generated outside the system, and eventually leave the network. In
+closed networks there is a fixed population of request that never
+leave the system.
+
+@cindex single class queueing network
+@cindex multiple class queueing network
+@cindex queueing network, single class
+@cindex queueing network, multiple class
+
+Queueing models can have a single request class (@emph{single class
+models}), meaning that all requests behave in the same way (e.g., they
+spend the same average time on each particular server). In
+@emph{multiple class models} there are multiple request classes, each
+with its own parameters (e.g., with different service times or
+different routing probabilities). Furthermore, in multiclass models
+there can be open and closed chains of requests at the same time.
+
+@cindex product-form queueing network
+@cindex queueing network, product-form
+
+A particular class of QN models, @emph{product-form} networks, is of
+particular interest. Product-form networks fulfill the following
+assumptions:
+
+@itemize
+
+@item The network can consist of open and closed job classes.
+
+@item The following queueing disciplines are allowed: FCFS, PS, LCFS-PR and IS.
+
+@item Service times for FCFS nodes must be exponentially distributed and
+class-independent. Service centers at PS, LCFS-PR and IS nodes can
+have any kind of service time distribution with a rational Laplace
+transform.  Furthermore, for PS, LCFS-PR and IS nodes, different
+classes of customers can have different service times.
+
+@item The service rate of an FCFS node is only allowed to depend on the
+number of jobs at this node; in a PS, LCFS-PR and IS node the service
+rate for a particular job class can also depend on the number of jobs
+of that class at the node.
+
+@item In open networks two kinds of arrival processes are allowed: i) the
+arrival process is Poisson, with arrival rate @math{\lambda} that can
+depend on the number of jobs in the network. ii) the arrival process
+consists of @math{C} independent Poisson arrival streams where the
+@math{C} job sources are assigned to the @math{C} chains; the arrival
+rate can be load dependent.
+
+@end itemize
+
+Product-form networks are attractive because steady-state performance
+measures can be efficiently computed.
+
+@c
+@c Single Class Models
+@c
+
+@node Single Class Models
+@section Single Class Models
+
+@cindex single class queueing network
+@cindex queueing network, single class
+
+In single class models, all requests are indistinguishable and belong
+to the same class. This means that every request has the same average
+service time, and all requests move through the system with the same
+routing probabilities.
+
+@noindent @strong{Model Inputs}
+
+@cindex external arrival rate
+@cindex service time
+@cindex routing probability matrix
+@cindex average number of visits
+
+@table @asis
+
+@item @math{{@lambda}_k}
+(Open models only) External arrival rate to service center @math{k}.
+
+@item @math{@lambda}
+(Open models only) Overall external arrival rate to the system as a whole: @math{\lambda = \sum_k \lambda_k}.
+
+@item @math{N}
+(Closed models only) Total number of requests in the system.
+
+@item @math{S_k}
+Mean service time at center @math{k}. @math{S_k} is the average time
+elapsed from service start to service completion at center @math{k}.
+
+@item @math{P_{i, j}}
+Routing probability matrix. @math{{\bf P} = [P_{i, j}]} is a @math{K
+\times K} matrix where @math{P_{i, j}} is the probability that a
+request completing service at center @math{i} is routed to center
+@math{j}. The probability that a request leaves the system after being
+served at center @math{i} is @math{\left(1-\sum_{j=1}^K P_{i, j}\right)}.
+
+@item @math{V_k}
+Mean number of visits to center @math{k} (also called @emph{visit
+ratio} or @emph{relative arrival rate}).
+
+@end table
+
+@noindent @strong{Model Outputs}
+
+@cindex utilization
+@cindex response time
+@cindex average number of customers
+@cindex throughput
+@cindex system response time
+@cindex system throughput
+
+@table @math
+
+@item U_k
+Utilization of service center @math{k}. The utilization is defined as
+the fraction of time in which the resource is busy (i.e., the server
+is processing requests).  If center @math{k} is a single-server or
+multiserver node, then @math{0 @leq{} U_k @leq{} 1}. If center
+@math{k} is an infinite server node (delay center), then @math{U_k}
+denotes the @emph{traffic intensity} and is defined as @math{U_k = X_k
+S_k}; in this case the utilization may be greater than one.
+
+@item R_k
+Average response time of service center @math{k}, defined as the mean
+time between the arrival of a request in the queue and service
+completion of the same request.
+
+@item Q_k
+Average number of requests in center @math{k}; this includes both the
+requests in the queue and those being served.
+
+@item X_k
+Throughput of service center @math{k}. The throughput is the rate of
+job completions, i.e., the average number of jobs completed over a
+given time interval.
+
+@end table
+
+@noindent Given the output parameters above, additional performance measures can
+be computed:
+
+@table @math
+
+@item X
+System throughput, @math{X = X_k / V_k} for any @math{k} for 
+which @math{V_k \neq 0}
+
+@item R
+System response time, @math{R = \sum_{k=1}^K R_k V_k}
+
+@item Q
+Average number of requests in the system, @math{Q = \sum_{k=1}^K Q_k}; for
+closed systems, this can be written as @math{Q = N-XZ};
+
+@end table
+
+For open, single class models, the scalar @math{\lambda} denotes the
+external arrival rate of requests to the system. The average number of
+visits @math{V_j} satisfy the following equation:
+
+@iftex
+@tex
+$$ V_j = P_{0, j} + \sum_{i=1}^K V_i P_{i, j} \quad j=1, \ldots, K $$
+@end tex
+@end iftex
+@ifnottex
+@example
+@group
+                  K
+                 ___
+                \
+V_j = P_(0, j) + >   V_i P_(i, j)    j=1,...,K
+                /___
+                 i=1
+@end group
+@end example
+@end ifnottex
+
+@noindent where @math{P_{0, j}} is the probability that an external
+request goes to center @math{j}. If we denote with @math{\lambda_j}
+the external arrival rate to center @math{j}, and @math{\lambda =
+\sum_j \lambda_j} the overall external arrival rate, then @math{P_{0,
+j} = \lambda_j / \lambda}.
+
+For closed models, the visit ratios satisfy the following equation:
+
+@iftex
+@tex
+$$\left\{\eqalign{V_j & = \sum_{i=1}^K V_i P_{i, j} \quad j=1, \ldots, K \cr
+                  V_r & = 1 \quad \hbox{for a selected reference station $r$}}\right. $$
+@end tex
+@end iftex
+@ifnottex
+@example
+/
+|         K
+|        ___
+|       \
+| V_j =  >   V_i P_(i, j)     j=1,...,K
+|       /___
+|        i=1
+|
+| V_r = 1                     for a selected reference station r
+\
+@end example
+@end ifnottex
+
+Note that the set of traffic equations @math{V_j = \sum_{i=1}^K V_i
+P_{i, j}} alone can only be solved up to a multiplicative constant; to
+get a unique solution we impose an additional constraint @math{V_r =
+1} for some @math{1 @leq{} r @leq{} K}. This constraint is equivalent
+to defining station @math{r} as the @emph{reference station}; the
+default is @math{r=1}, @pxref{doc-qncsvisits}. A job that returns to
+the reference station is assumed to have completed its activity
+cycle. The network throughput is set to the throughput of the
+reference station.
+
+@GETHELP{qncsvisits}
+
+@GETHELP{qnosvisits}
+
+@c
+@c
+@c
+@noindent @strong{EXAMPLE}
+
+@float Figure,fig:qn_closed_single
+@center @image{qn_closed_single,3in}
+@caption{Closed network with a single class of requests}
+@end float
+
+@ref{fig:qn_closed_single} shows a closed queueing network with a
+single class of requests. The network has three service centers,
+labeled @emph{CPU}, @emph{Disk1} and @emph{Disk2}, and is known as a
+@emph{central server} model of a computer system. Requests spend some
+time at the CPU, which is represented by a PS (Processor Sharing)
+node. After that, requests are routed to Disk1 with probability
+@math{0.3}, and to Disk2 with probability @math{0.7}. Both Disk1 and
+Disk2 are FCFS nodes.
+
+If we label the servers as CPU=1, Disk1=2, Disk2=3, we can define the
+routing matrix as follows:
+
+@iftex
+@tex
+$$
+{\bf P} = \pmatrix{ 0 & 0.3 & 0.7 \cr
+                    1 & 0 & 0 \cr
+                    1 & 0 & 0 }
+$$
+@end tex
+@end iftex
+@ifnottex
+@example
+    / 0  0.3  0.7 \
+P = | 1  0    0   |
+    \ 1  0    0   /
+@end example
+@end ifnottex
+
+The visit ratios @math{V}, using station 1 as the reference
+station, can be computed with:
+
+@example
+@GETDEMO{qncsvisits,1}
+   @result{} V = 1.00000   0.30000   0.70000
+@end example
+
+@noindent @strong{EXAMPLE}
+
+@float Figure,fig:qn_open_single
+@center @image{qn_open_single,3in}
+@caption{Open Queueing Network with a single class of requests}
+@end float
+
+@ref{fig:qn_open_single} shows a open QN with a single class of
+requests. The network has the same structure as the one in
+@ref{fig:qn_closed_single}, with the difference that here we have a
+stream of jobs arriving from outside the system, at a rate
+@math{\lambda}. After service completion at the CPU, a job can leave
+the system with probability @math{0.2}, or be transferred to other
+nodes with the probabilities shown in the figure.
+
+The routing matrix is
+
+@iftex
+@tex
+$$
+{\bf P} = \pmatrix{ 0 & 0.3 & 0.5 \cr
+                    1 & 0 & 0 \cr
+                    1 & 0 & 0 }
+$$
+@end tex
+@end iftex
+@ifnottex
+@example
+    / 0  0.3  0.5 \
+P = | 1  0    0   |
+    \ 1  0    0   /
+@end example
+@end ifnottex
+
+If we let @math{\lambda = 1.2}, we can compute the visit ratios
+@math{V} as follows:
+
+@example
+@GETDEMO{qnosvisits,1}
+   @result{} V = 5.0000   1.5000   2.5000
+@end example
+
+Function @command{qnosvisits} expects a vector with @math{K} elements
+as a second parameter, for open networks only. The vector contains the
+arrival rates at each individual node; since in our example external
+arrivals exist only for node @math{S_1} with rate @math{\lambda =
+1.2}, the second parameter is @code{[1.2, 0, 0]}.
+
+@c
+@c Open Networks
+@c
+@subsection Open Networks
+
+Jackson networks satisfy the following conditions:
+
+@itemize
+
+@item
+There is only one job class in the network; the total number of jobs
+in the system is unbounded.
+
+@item
+There are @math{K} service centers in the network. Each service center
+may have Poisson arrivals from outside the system. A job can leave
+the system from any node.
+
+@item
+Arrival rates as well as routing probabilities are independent from
+the number of nodes in the network.
+
+@item
+External arrivals and service times at the service centers are
+exponentially distributed, and in general can be load-dependent.
+
+@item
+Service discipline at each node is FCFS
+
+@end itemize
+
+We define the @emph{joint probability vector} @math{\pi(n_1,
+@dots{}, n_K)} as the steady-state probability that there are @math{n_k}
+requests at service center @math{k}, for all @math{k=1, @dots{}, N}.
+Jackson networks have the property that the joint probability is the
+product of the marginal probabilities @math{\pi_k}:
+
+@iftex
+@tex
+$$ \pi(n_1, \ldots, n_K) = \prod_{k=1}^K \pi_k(n_k) $$
+@end tex
+@end iftex
+@ifnottex
+@example
+@var{joint_prob} = prod( @var{pi} )
+@end example
+@end ifnottex
+
+@noindent where @math{\pi_k(n_k)} is the steady-state probability
+that there are @math{n_k} requests at service center @math{k}.
+
+@GETHELP{qnos}
+
+From the results computed by this function, it is possible to derive
+other quantities of interest as follows:
+
+@itemize
+
+@item
+@strong{System Response Time}: The overall system response time
+can be computed as
+@iftex
+@tex
+$R_s = \sum_{k=1}^K V_k R_k$
+@end tex
+@end iftex
+@ifnottex
+@code{R_s = dot(V,R);}
+@end ifnottex
+
+@item
+@strong{Average number of requests}: The average number of requests
+in the system can be computed as:
+@iftex
+@tex
+$$Q_{avg} = \sum_{k=1}^K Q_k$$
+@end tex
+@end iftex
+@ifnottex
+@code{Q_avg = sum(Q)}
+@end ifnottex
+
+@end itemize
+
+@noindent @strong{EXAMPLE}
+
+@example
+@GETDEMO{qnos,1}
+@print{} R_s =  1.4062
+@print{} N =  4.2186
+@end example
+
+@c
+@c Closed Networks
+@c
+@subsection Closed Networks
+
+@GETHELP{qncsmva}
+
+
+@noindent @strong{EXAMPLE}
+
+@example
+@GETDEMO{qncsmva,1}
+@end example
+
+@c
+@c MVA for single class, closed networks with load dependent servers
+@c
+@GETHELP{qncsmvald}
+
+@c
+@c CMVA for single class, closed networks with a single load dependent servers
+@c
+@GETHELP{qncscmva}
+
+@c
+@c Approximate MVA for single class, closed networks
+@c
+@GETHELP{qncsmvaap}
+
+@c
+@c Convolution
+@c
+
+According to the BCMP theorem, the state probability of a closed
+single class queueing network with @math{K} nodes and @math{N} requests
+can be expressed as:
+
+@iftex
+@tex
+$$ \pi(n_1, \ldots, n_K) = {1 \over G(N)} \prod_{k=1}^K F_k(n_k) $$
+@end tex
+@end iftex
+@ifnottex
+@example
+@group
+n = [n1, @dots{} nK]; @r{population vector}
+p = 1/G(N+1) \prod F(k,k);
+@end group
+@end example
+@end ifnottex
+
+Here @math{\pi(n_1, @dots{}, n_K)} is the joint probability of
+having @math{n_k} requests at node @math{k}, for all @math{k=1,
+@dots{}, K}; we have that @math{\sum_{k=1}^K n_k = N}
+
+The @emph{convolution algorithms} computes the normalization constants
+@math{{\bf G} = \left[G(0), @dots{}, G(N)\right]} for single-class,
+closed networks with @math{N} requests.  The normalization constants
+are returned as vector @code{@var{G}=[@var{G}(1), @dots{}
+@var{G}(N+1)]} where @code{@var{G}(i+1)} is the value of @math{G(i)}
+(remember that Octave uses 1-base vectors). The normalization constant
+can be used to compute all performance measures of interest
+(utilization, average response time and so on).
+
+@command{queueing} implements the convolution algorithm, in the function
+@command{qncsconv} and @command{qncsconvld}. The first one
+supports single-station nodes, multiple-station nodes and IS nodes.
+The second one supports networks with general load-dependent service
+centers.
+
+
+@GETHELP{qncsconv}
+
+
+@noindent @strong{EXAMPLE}
+
+The normalization constant @math{G} can be used to compute the
+steady-state probabilities for a closed single class product-form
+Queueing Network with @math{K} nodes and @math{N} requests. Let
+@code{@var{n} = [@math{n_1, @dots{}, n_K}]} be a valid
+population vector, @math{\sum_{k=1}^K n_k = N}. Then, the steady-state
+probability @code{@var{p}(k)} to have @code{@var{n}(k)} requests at
+service center @math{k} can be computed as:
+
+@iftex
+@tex
+$$
+p_k(n_k) = {(V_k S_k)^{n_k} \over G(N)} \left(G(N-n_k) - V_k S_k G(N-n_k-1)\right), \quad k=1, \ldots, K
+$$
+@end tex
+@end iftex
+
+@example
+@GETDEMO{qncsconv,1}
+@print{} Prob( n(1) = 1 ) = 0.17975
+@print{} Prob( n(2) = 2 ) = 0.48404
+@print{} Prob( n(3) = 0 ) = 0.52779
+@end example
+
+@noindent 
+(recall that @code{@var{G}(@var{N}+1)} represents @math{G(N)}, since
+in Octave array indices start at one).
+
+
+@c
+@GETHELP{qncsconvld}
+
+
+@c
+@c
+@c
+@subsection Non Product-Form QNs
+@anchor{Non Product-Form QNs}
+
+@c
+@c MVABLO algorithm for approximate analysis of closed, single class
+@c QN with blocking
+@c
+@GETHELP{qncsmvablo}
+
+@c
+@GETHELP{qnmarkov}
+
+@c
+@c
+@c
+@node Multiple Class Models
+@section Multiple Class Models
+
+@cindex multiple class queueing network
+@cindex queueing network, multiple class
+
+In multiple class queueing models, we assume that there exist @math{C}
+different classes of requests. Each request from class @math{c} spends
+on average time @math{S_{c, k}} in service at center @math{k}. For
+open models, we denote with @math{{\bf \lambda} = \lambda_{c, k}} the
+arrival rates, where @math{\lambda_{c, k}} is the external arrival
+rate of class @math{c} requests at center @math{k}. For closed models,
+we denote with @math{{\bf N} = \left[N_1, @dots{}, N_C\right]} the population
+vector, where @math{N_c} is the number of class @math{c} requests in
+the system.
+
+The transition probability matrix for multiple class networks is a
+@math{C \times K \times C \times K} matrix @math{{\bf P} = [P_{r, i,
+s, j}]} where @math{P_{r, i, s, j}} is the probability that a class
+@math{r} request which completes service at center @math{i} will join
+server @math{j} as a class @math{s} request.
+
+Model input and outputs can be adjusted by adding additional indexes
+for the customer classes.
+
+@noindent @strong{Model Inputs}
+
+@cindex external arrival rate
+@cindex service time
+@cindex routing probability matrix
+@cindex average number of visits
+
+@table @asis
+
+@item @math{@lambdack}
+(open networks) External arrival rate of class-@math{c} requests to service center @math{k}
+
+@item @math{@lambda}
+(open networks) Overall external arrival rate to the whole system: @math{\lambda = \sum_{c=1}^C \sum_{k=1}^K \lambda_{c, k}}
+
+@item @math{N_c}
+(closed networks) Number of class @math{c} requests in the system.
+
+@item @math{S_{c, k}}
+Average service time. @math{S_{c, k}} is the average service time on
+service center @math{k} for class @math{c} requests.
+
+@item @math{P_{r, i, s, j}}
+Routing probability matrix. @math{{\bf P} = [P_{r, i, s, j}]} is a @math{C
+\times K \times C \times K} matrix such that @math{P_{r, i, s, j}} is
+the probability that a class @math{r} request which completes service
+at server @math{i} will move to server @math{j} as a class @math{s}
+request.
+
+@item @math{V_{c, k}}
+Mean number of visits of class @math{c} requests to center @math{k}.
+
+@end table
+
+@noindent @strong{Model Outputs}
+
+@cindex utilization
+@cindex response time
+@cindex average number of customers
+@cindex throughput
+@cindex system response time
+@cindex system throughput
+
+@table @asis
+
+@item @math{U_{c, k}}
+Utilization of service center @math{k} by class @math{c} requests. The
+utilization is defined as the fraction of time in which the resource
+is busy (i.e., the server is processing requests).  If center @math{k}
+is a single-server or multiserver node, then 
+@math{0 @leq{} U_{c, k} @leq{} 1}. 
+If center @math{k} is an infinite server node (delay
+center), then @math{U_{c, k}} denotes the @emph{traffic intensity} and
+is defined as @math{U_{c, k} = X_{c, k} S_{c, k}}; in this case the
+utilization may be greater than one.
+
+@item @math{R_{c, k}}
+Average response time experienced by class @math{c} requests on service
+center @math{k}. The average response time is defined as the average
+time between the arrival of a customer in the queue, and the completion
+of service.
+
+@item @math{Q_{c, k}}
+Average number of class @math{c} requests on service center
+@math{k}. This includes both the requests in the queue, and the request
+being served.
+
+@item @math{X_{c, k}}
+Throughput of service center @math{k} for class @math{c} requests.  The
+throughput is defined as the rate of completion of class @math{c}
+requests.
+
+@end table
+
+@noindent It is possible to define aggregate performance measures as follows:
+
+@table @math
+
+@item U_k
+Utilization of service center @math{k}:
+@iftex
+@tex
+$U_k = \sum_{c=1}^C U_{c, k}$
+@end tex
+@end iftex
+@ifnottex
+@code{Uk = sum(U,k);}
+@end ifnottex
+
+@item R_c
+System response time for class @math{c} requests:
+@iftex
+@tex
+$R_c = \sum_{k=1}^K R_{c, k} V_{c, k}$
+@end tex
+@end iftex
+@ifnottex
+@code{Rc = sum( V.*R, 1 );}
+@end ifnottex
+
+@item Q_c
+Average number of class @math{c} requests in the system:
+@iftex
+@tex
+$Q_c = \sum_{k=1}^K Q_{c, k}$
+@end tex
+@end iftex
+@ifnottex
+@code{Qc = sum( Q, 2 );}
+@end ifnottex
+
+@item X_c
+Class @math{c} throughput:
+@iftex
+@tex
+$X_c = X_{c, k} / V_{c, k}$ for any @math{k} for which @math{V_{c,k} \neq 0}
+@end tex
+@end iftex
+@ifnottex
+@code{X(c) = X(c,k) ./ V(c,k);} for any @math{k} for which @code{V(c,k) != 0}
+@end ifnottex
+
+@end table
+
+For closed networks, we can define the visit ratios @math{V_{s, j}}
+for class @math{s} customers at service center @math{j} as follows:
+
+@iftex
+@tex
+$$\left\{\eqalign{ V_{s, j} & = \sum_{r=1}^C \sum_{i=1}^K V_{r, i} P_{r, i, s, j}, \quad s=1, \ldots, C, j=1, \ldots, K \cr
+                   V_{s, r_s} & = 1, \quad s=1, \ldots, C}\right. $$
+@end tex
+@end iftex
+@ifnottex
+@group
+V_sj = sum_r sum_i V_ri P_risj    s=1,...,C, j=1,...,K
+V_s r_s = 1                       s=1,...,C
+@end group
+@end ifnottex
+
+@noindent where @math{r_s} is the class @math{s}
+reference station. Similarly to single class models, the traffic
+equation for closed multiclass networks can be solved up to
+multiplicative constants unless we choose one reference station for
+each closed class and set its visit ratio to 1.
+
+For open networks the traffic equations are as follows:
+
+@iftex
+@tex
+$$V_{s, j} = P_{0, s, j} + \sum_{r=1}^C \sum_{i=1}^K V_{r, i} P_{r, i, s, j} \quad s=1, \ldots, C, j=1, \ldots, K$$
+@end tex
+@end iftex
+@ifnottex
+@group
+V_sj = P_0sj + sum_r sum_i V_ri P_risj  s=1,...,C, j=1,...,K
+@end group
+@end ifnottex
+
+@noindent where @math{P_{0, s, j}} is the probability that an external
+arrival goes to service center @math{j} as a class-@math{s} request.
+If @math{\lambda_{s, j}} is the external arrival rate of class
+@math{s} requests to service center @math{j}, and @math{\lambda =
+\sum_s \sum_j \lambda_{s, j}} is the overall external arrival rate,
+then @math{P_{0, s, j} = \lambda_{s, j} / \lambda}.
+
+@GETHELP{qncmvisits}
+
+@GETHELP{qnomvisits}
+
+@c
+@c Open Networks
+@c
+@subsection Open Networks
+
+@c
+@c Open network with multiple classes
+@c
+@GETHELP{qnom}
+
+@c
+@c Closed Networks
+@c
+@subsection Closed Networks
+
+@c
+@GETHELP{qncmpopmix}
+
+@noindent @strong{EXAMPLE}
+
+Let us consider a multiclass network with @math{C=2} customer classes;
+the maximum number of class 1 requests is 2, and the maximum number of
+class 2 requests is 3. How is it possible to allocate 3 requests to
+the two classes so that the maximum number of requests per class is
+not exceeded?
+
+@example
+@GETDEMO{qncmpopmix,1}
+@print{} mix = [ [2 1] [1 2] [0 3] ]
+@end example
+
+
+@c
+@GETHELP{qncmnpop}
+
+
+@c
+@c MVA for multiple class, closed networks
+@c
+@GETHELP{qncmmva}
+
+
+@c
+@c Approximate MVA, with Bard-Schweitzer approximation
+@c
+@GETHELP{qncmmvabs}
+
+@c
+@c Mixed networks
+@c
+@subsection Mixed Networks
+
+@c
+@c MVA for mixed networks
+@c
+@GETHELP{qnmix}
+
+@c
+@c
+@c
+@node Generic Algorithms
+@section Generic Algorithms
+
+The @code{queueing} package provides a high-level function
+@command{qnsolve} for analyzing QN models. @command{qnsolve} takes as
+input a high-level description of the queueing model, and delegates
+the actual solution of the model to one of the lower-level
+function. @command{qnsolve} supports single or multiclass models, but at
+the moment only product-form networks can be analyzed. For non
+product-form networks @xref{Non Product-Form QNs}.
+
+@command{qnsolve} accepts two input parameters. The first one is the list
+of nodes, encoded as an Octave @emph{cell array}. The second parameter
+is the vector of visit ratios @var{V}, which can be either a vector
+(for single-class models) or a two-dimensional matrix (for
+multiple-class models).
+
+Individual nodes in the network are structures build using the
+@command{qnmknode} function.
+
+@GETHELP{qnmknode}
+
+After the network has been defined, it is possible to solve it using
+@command{qnsolve}.
+
+@GETHELP{qnsolve}
+
+@noindent @strong{EXAMPLE}
+
+Let us consider a closed, multiclass network with @math{C=2} classes
+and @math{K=3} service center. Let the population be @math{M=(2, 1)}
+(class 1 has 2 requests, and class 2 has 1 request). The nodes are as
+follows:
+
+@itemize
+
+@item Node 1 is a @math{M/M/1}--FCFS node, with load-dependent service
+times. Service times are class-independent, and are defined by the
+matrix @code{[0.2 0.1 0.1; 0.2 0.1 0.1]}. Thus, @code{@var{S}(1,2) =
+0.2} means that service time for class 1 customers where there are 2
+requests in 0.2. Note that service times are class-independent;
+
+@item Node 2 is a @math{-/G/1}--PS node, with service times
+@math{S_{1, 2} = 0.4} for class 1, and @math{S_{2, 2} = 0.6} for class 2
+requests;
+
+@item Node 3 is a @math{-/G/\infty} node (delay center), with service
+times @math{S_{1, 3}=1} and @math{S_{2, 3}=2} for class 1 and 2
+respectively.
+
+@end itemize
+
+After defining the per-class visit count @var{V} such that
+@code{@var{V}(c,k)} is the visit count of class @math{c} requests to
+service center @math{k}.  We can define and solve the model as
+follows:
+
+@example
+
+
+@GETDEMO{qnsolve,1}
+@end example
+
+@GETHELP{qnclosed}
+
+@noindent @strong{EXAMPLE}
+
+@example
+@GETDEMO{qnclosed,1}
+@end example
+
+@GETHELP{qnopen}
+
+
+@c
+@c
+@c
+@node Bounds Analysis
+@section Bounds Analysis
+
+@c
+@GETHELP{qnosaba}
+
+@c
+@GETHELP{qnomaba}
+
+@c
+@GETHELP{qncsaba}
+
+@c
+@GETHELP{qncmaba}
+
+@c
+@GETHELP{qnosbsb}
+
+@c
+@GETHELP{qncsbsb}
+
+@c
+@GETHELP{qncmbsb}
+
+@c
+@GETHELP{qncmcb}
+
+@c
+@GETHELP{qncspb}
+
+@c
+@GETHELP{qncsgb}
+
+@c
+@c Examples
+@c
+
+@node QN Analysis Examples
+@section QN Analysis Examples
+
+In this section we illustrate with a few examples how the
+@code{queueing} package can be used to analyze queueing network
+models. Further examples can be found in the functions demo blocks,
+and can be inspected with the @code{demo @emph{function}} Octave
+command.
+
+@subsection Closed, Single Class Network
+
+Let us consider again the network shown in
+@ref{fig:qn_closed_single}. We denote with @math{S_k} the average
+service time at center @math{k}, @math{k=1, 2, 3}. Let the service
+times be @math{S_1 = 1.0}, @math{S_2 = 2.0} and @math{S_3 = 0.8}. The
+routing of jobs within the network is described with a @emph{routing
+probability matrix} @math{\bf P}: a request completing service at
+center @math{i} is enqueued at center @math{j} with probability
+@math{P_{i, j}}.  We use the following routing matrix:
+
+@iftex
+@tex
+$$
+{\bf P} = \pmatrix{ 0 & 0.3 & 0.7 \cr
+                    1 & 0 & 0 \cr
+                    1 & 0 & 0 }
+$$
+@end tex
+@end iftex
+@ifnottex
+@example
+    / 0  0.3  0.7 \
+P = | 1  0    0   |
+    \ 1  0    0   /
+@end example
+@end ifnottex
+
+The network above can be analyzed with the @command{qnclosed} function
+@pxref{doc-qnclosed}. @command{qnclosed} requires the following
+parameters:
+
+@table @var
+
+@item N
+Number of requests in the network (since we are considering a closed
+network, the number of requests is fixed)
+
+@item S
+Array of average service times at the centers: @code{@var{S}(k)} is
+the average service time at center @math{k}.
+
+@item V
+Array of visit ratios: @code{@var{V}(k)} is the average number of
+visits to center @math{k}.
+
+@end table
+
+We can compute @math{V_k} from the routing probability matrix
+@math{P_{i, j}} using the @command{qncsvisits} function
+@pxref{doc-qncsvisits}.  Therefore, we can analyze the network for a
+given population size @math{N} (e.g., @math{N=10}) as follows:
+
+@example
+@group
+@kbd{N = 10;}
+@kbd{S = [1 2 0.8];}
+@kbd{P = [0 0.3 0.7; 1 0 0; 1 0 0];}
+@kbd{V = qncsvisits(P);}
+@kbd{[U R Q X] = qnclosed( N, S, V )}
+   @result{} U = 0.99139 0.59483 0.55518
+   @result{} R = 7.4360  4.7531  1.7500
+   @result{} Q = 7.3719  1.4136  1.2144
+   @result{} X = 0.99139 0.29742 0.69397
+@end group
+@end example
+
+The output of @command{qnclosed} includes the vectors of utilizations
+@math{U_k} at center @math{k}, response time @math{R_k}, average
+number of customers @math{Q_k} and throughput @math{X_k}. In our
+example, the throughput of center 1 is @math{X_1 = 0.99139}, and the
+average number of requests in center 3 is @math{Q_3 = 1.2144}. The
+utilization of center 1 is @math{U_1 = 0.99139}, which is the highest
+among the service centers. Thus, center 1 is the @emph{bottleneck
+device}.
+
+This network can also be analyzed with the @command{qnsolve} function
+@pxref{doc-qnsolve}. @command{qnsolve} can handle open, closed or
+mixed networks, and allows the network to be described in a very
+flexible way.  First, let @var{Q1}, @var{Q2} and @var{Q3} be the
+variables describing the service centers. Each variable is
+instantiated with the @command{qnmknode} function.
+
+@example
+@group
+@kbd{Q1 = qnmknode( "m/m/m-fcfs", 1 );}
+@kbd{Q2 = qnmknode( "m/m/m-fcfs", 2 );}
+@kbd{Q3 = qnmknode( "m/m/m-fcfs", 0.8 );}
+@end group
+@end example
+
+The first parameter of @command{qnmknode} is a string describing the
+type of the node; @code{"m/m/m-fcfs"} denotes a @math{M/M/m}--FCFS
+center (this parameter is case-insensitive). The second parameter
+gives the average service time. An optional third parameter can be
+used to specify the number @math{m} of service centers. If omitted, it
+is assumed @math{m=1} (single-server node).
+
+Now, the network can be analyzed as follows:
+
+@example
+@group
+@kbd{N = 10;}
+@kbd{V = [1 0.3 0.7];}
+@kbd{[U R Q X] = qnsolve( "closed", N, @{ Q1, Q2, Q3 @}, V )}
+   @result{} U = 0.99139 0.59483 0.55518
+   @result{} R = 7.4360  4.7531  1.7500
+   @result{} Q = 7.3719  1.4136  1.2144
+   @result{} X = 0.99139 0.29742 0.69397
+@end group
+@end example
+
+@subsection Open, Single Class Network
+
+Let us consider an open network with @math{K=3} service centers and
+the following routing probabilities:
+
+@iftex
+@tex
+$$
+{\bf P} = \pmatrix{ 0 & 0.3 & 0.5 \cr
+                    1 & 0 & 0 \cr
+                    1 & 0 & 0 }
+$$
+@end tex
+@end iftex
+@ifnottex
+@example
+    / 0  0.3  0.5 \
+P = ! 1  0    0   |
+    \ 1  0    0   /
+@end example
+@end ifnottex
+
+In this network, requests can leave the system from center 1 with
+probability @math{1-(0.3+0.5) = 0.2}. We suppose that external jobs
+arrive at center 1 with rate @math{\lambda_1 = 0.15}; there are no
+arrivals at centers 2 and 3.
+
+Similarly to closed networks, we first compute the visit counts
+@math{V_k} to center @math{k}, @math{k = 1, 2, 3}. We use the
+@command{qnosvisits} function as follows:
+
+@example
+@group
+@kbd{P = [0 0.3 0.5; 1 0 0; 1 0 0];}
+@kbd{lambda = [0.15 0 0];}
+@kbd{V = qnosvisits(P, lambda)}
+   @result{} V = 5.00000 1.50000 2.50000
+@end group
+@end example
+
+@noindent where @code{@var{lambda}(k)} is the arrival rate at center @math{k},
+and @math{\bf P} is the routing matrix. Assuming the same service times as
+in the previous example, the network can be analyzed with the
+@command{qnopen} function @pxref{doc-qnopen}, as follows:
+
+@example
+@group
+@kbd{S = [1 2 0.8];}
+@kbd{[U R Q X] = qnopen( sum(lambda), S, V )}
+   @result{} U = 0.75000 0.45000 0.30000
+   @result{} R = 4.0000  3.6364  1.1429
+   @result{} Q = 3.00000 0.81818 0.42857
+   @result{} X = 0.75000 0.22500 0.37500
+@end group
+@end example
+
+The first parameter of the @command{qnopen} function is the (scalar)
+aggregate arrival rate.
+
+Again, it is possible to use the @command{qnsolve} high-level function:
+
+@example
+@group
+@kbd{Q1 = qnmknode( "m/m/m-fcfs", 1 );}
+@kbd{Q2 = qnmknode( "m/m/m-fcfs", 2 );}
+@kbd{Q3 = qnmknode( "m/m/m-fcfs", 0.8 );}
+@kbd{lambda = [0.15 0 0];}
+@kbd{[U R Q X] = qnsolve( "open", sum(lambda), @{ Q1, Q2, Q3 @}, V )}
+   @result{} U = 0.75000 0.45000 0.30000
+   @result{} R = 4.0000  3.6364  1.1429
+   @result{} Q = 3.00000 0.81818 0.42857
+   @result{} X = 0.75000 0.22500 0.37500
+@end group
+@end example
+
+@subsection Closed Multiclass Network/1
+
+The following example is taken from Herb Schwetman, @cite{Implementing
+the Mean Value Algorithm for the Solution of Queueing Network Models},
+Technical Report CSD-TR-355, Department of Computer Sciences, Purdue
+University, Feb 15, 1982.
+
+Let us consider the following multiclass QN with three servers and two classes
+
+@float Figure,fig:apl
+@center @image{qn_closed_multi_apl}
+@end float
+
+Servers 1 and 2 (labeled @emph{APL} and @emph{IMS}, respectively) are
+infinite server nodes; server 3 (labeled @emph{SYS}) is Processor
+Sharing (PS). Mean service times are given in the following table:
+
+@multitable @columnfractions .15 .15 .15 .15
+@headitem @tab  APL @tab IMS @tab SYS
+@item Class 1 @tab 1 @tab - @tab 0.025
+@item Class 2 @tab - @tab 15 @tab 0.500
+@end multitable
+
+There is no class switching. If  we assume a population of 15 requests
+for  class 1,  and  5 requests  for class  2,  then the  model can  be
+analyzed as follows:
+
+@example
+@GETDEMO{qncmmva,2}
+  @result{}
+U =
+
+   14.32312    0.00000    0.35808
+    0.00000    4.70699    0.15690
+
+R =
+
+    1.00000    0.00000    0.04726
+    0.00000   15.00000    0.93374
+
+Q =
+
+   14.32312    0.00000    0.67688
+    0.00000    4.70699    0.29301
+
+X =
+
+   14.32312    0.00000   14.32312
+    0.00000    0.31380    0.31380
+@end example
+
+@subsection Closed Multiclass Network/2
+
+The following example is from M. Marzolla, @cite{The qnetworks
+Toolbox: A Software Package for Queueing Networks Analysis}, Technical
+Report
+@uref{https://www.moreno.marzolla.name/publications/papers/UBLCS-2010-04.pdf,
+UBLCS-2010-04}, Department of Computer Science, University of Bologna,
+Italy, February 2010.
+
+@float Figure,fig:web_model
+@center @image{qn_web_model,3in}
+@caption{Three-tier enterprise system model}
+@end float
+
+The model shown in @ref{fig:web_model} shows a three-tier enterprise
+system with @math{K=6} service centers. The first tier contains the
+@emph{Web server} (node 1), which is responsible for generating Web
+pages and transmitting them to clients. The application logic is
+implemented by nodes 2 and 3, and the storage tier is made of nodes
+4--6.The system is subject to two workload classes, both represented
+as closed populations of @math{N_1} and @math{N_2} requests,
+respectively. Let @math{D_{c, k}} denote the service demand of class
+@math{c} requests at center @math{k}. We use the parameter values:
+
+@multitable @columnfractions .2 .33 .1 .1
+@headitem Serv. no. @tab  Name @tab Class 1 @tab Class 2
+@item 1 @tab Web Server    @tab 12 @tab 2
+@item 2 @tab App. Server 1 @tab 14 @tab 20
+@item 3 @tab App. Server 2 @tab 23 @tab 14
+@item 4 @tab DB Server 1   @tab 20 @tab 90
+@item 5 @tab DB Server 2   @tab 80 @tab 30
+@item 6 @tab DB Server 3   @tab 31 @tab 33
+@end multitable
+
+We set the total number of requests to 100, that is @math{N_1 + N_2 =
+N = 100}, and we study how different population mixes @math{(N_1,
+N_2)} affect the system throughput and response time. Let
+@math{0 < \beta_1 < 1} denote the fraction of class 1 requests:
+@math{N_1 = \beta_1 N}, @math{N_2 = (1-\beta_1)N}. The following
+Octave code defines the model for @math{\beta_1 = 0.1}:
+
+@example
+@group
+N = 100;     # total population size
+beta1 = 0.1; # fraction of class 1 reqs.
+S = [12 14 23 20 80 31; ...
+      2 20 14 90 30 33 ];
+V = ones(size(S));
+pop = [fix(beta1*N) N-fix(beta1*N)];
+[U R Q X] = qncmmva(pop, S, V);
+@end group
+@end example
+
+The @command{qncmmva(pop, S, V)} function invocation uses the
+multiclass MVA algorithm to compute per-class utilizations @math{U_{c,
+k}}, response times @math{R_{c,k}}, mean queue lengths @math{Q_{c,k}}
+and throughputs @math{X_{c,k}} at each service center @math{k}, given
+a population vector @var{pop}, mean service times @var{S} and visit
+ratios @var{V}. Since we are given the service demands @math{D_{c, k}
+= S_{c, k} V_{c,k}}, but function @command{qncmmva} requires separate
+service times and visit ratios, we set the service times equal to the
+demands, and all visit ratios equal to one. Overall class and system
+throughputs and response times can also be computed:
+
+@example
+@group
+X1 = X(1,1) / V(1,1)     # class 1 throughput
+        @result{} X1 =  0.0044219
+X2 = X(2,1) / V(2,1)     # class 2 throughput
+        @result{} X2 =  0.010128
+XX = X1 + X2             # system throughput
+        @result{} XX =  0.014550
+R1 = dot(R(1,:), V(1,:)) # class 1 resp. time
+        @result{} R1 =  2261.5
+R2 = dot(R(2,:), V(2,:)) # class 2 resp. time
+        @result{} R2 =  8885.9
+RR = N / XX              # system resp. time
+        @result{} RR =  6872.7
+@end group
+@end example
+
+@code{dot(X,Y)} computes the dot product of two vectors.
+@code{R(1,:)} is the first row of matrix @var{R} and @code{V(1,:)} is
+the first row of matrix @var{V}, so @code{dot(R(1,:), V(1,:))}
+computes @math{\sum_k R_{1,k} V_{1,k}}.
+
+@float Figure,fig:web
+@center @image{web,5in}
+@caption{Throughput and Response Times as a function of the population mix}
+@end float
+
+We can also compute the system power @math{\Phi = X / R}, which
+defines how efficiently resources are being used: high values of
+@math{\Phi} denote the desirable situation of high throughput and low
+response time. @ref{fig:power} shows @math{\Phi} as a function of
+@math{\beta_1}. We observe a ``plateau'' of the global system power,
+corresponding to values of @math{\beta_1} which approximately lie
+between @math{0.3} and @math{0.7}. The per-class power exhibits an
+interesting (although not completely surprising) pattern, where the
+class with higher population exhibits worst efficiency as it produces
+higher contention on the resources.
+
+@float Figure,fig:power
+@center @image{power,5in}
+@caption{System Power as a function of the population mix}
+@end float
+
+@subsection Closed Multiclass Network/3
+
+We now consider an example of multiclass network with class switching.
+The example is taken from @ref{Sch82}, and is shown in Figure
+@ref{fig:class_switching}.
+
+@float Figure,fig:class_switching
+@center @image{qn_closed_multi_cs,3in}
+@caption{Multiclass Model with Class Switching}
+@end float
+
+The system consists of three devices and two job classes. The CPU node
+is a PS server, while the two nodes labeled I/O are FCFS. Class 1 mean
+service time at the CPU is @math{0.01}; class 2 mean service time at
+the CPU is @math{0.05}. The mean service time at node 2 is @math{0.1},
+and is class-independent. Similarly, the mean service time at node 3
+is @math{0.07}. Jobs in class 1 leave the CPU and join class 2 with
+probability @math{0.1}; jobs of class 2 leave the CPU and join class 1
+with probability @math{0.2}. There are @math{N=3} jobs, which are
+initially allocated to class 1. However, note that since class
+switching is allowed, the total number of jobs in each class does not
+remain constant; however the total number of jobs does.
+
+@example
+@GETDEMO{qncmmva,3}
+  @result{}
+U =
+
+   0.12609   0.61784   0.25218
+   0.31522   0.13239   0.31522
+
+R =
+
+   0.014653   0.133148   0.163256
+   0.073266   0.133148   0.163256
+
+Q =
+
+   0.18476   1.17519   0.41170
+   0.46190   0.25183   0.51462
+
+X =
+
+   12.6089    8.8262    2.5218
+    6.3044    1.8913    3.1522
+@end example
