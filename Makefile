@@ -38,7 +38,7 @@ clean:
 	for d in $(SUBDIRS); do \
 		$(MAKE) -C $$d $(MAKECMDGOALS); \
 	done
-	\rm -r -f *~ $(DISTNAME).tar.gz $(DISTNAME).tar.gz.uue $(PROGNAME) $(PROGNAME)-html.tar.gz $(PROGNAME)-html.tar.gz.uue $(PROGNAME)-html INSTALL
+	\rm -r -f *~ $(DISTNAME).tar.gz $(DISTNAME).zip $(PROGNAME) $(PROGNAME)-html.tar.gz $(PROGNAME)-html INSTALL
 
 distclean: clean
 	for d in $(SUBDIRS); do \
@@ -46,7 +46,7 @@ distclean: clean
 	done
 	\rm -r -f doc/conf.texi fname DESCRIPTION $(PROGNAME)-html
 
-$(DISTNAME).tar.gz:
+$(DISTNAME).tar.gz $(DISTNAME).zip:
 	\rm -r -f $(PROGNAME) fname
 	echo "$(PROGNAME)" > fname
 	mkdir $(PROGNAME)
@@ -56,14 +56,16 @@ $(DISTNAME).tar.gz:
 	done
 	ln $(DISTFILES) $(PROGNAME)/
 	tar cfz $(DISTNAME).tar.gz $(PROGNAME)/
+	zip -r $(DISTNAME).zip $(PROGNAME)/
 
 $(PROGNAME)-html.tar.gz:
 	octave-cli -qf --eval "pkg install -local $(DISTNAME).tar.gz; pkg load $(PROGNAME); pkg load generate_html;  generate_package_html ('$(PROGNAME)', '$(PROGNAME)-html', 'octave-forge'); pkg uninstall $(PROGNAME)"
 	tar cfz $(PROGNAME)-html.tar.gz $(PROGNAME)-html
 
-dist: ALL $(DISTNAME).tar.gz $(PROGNAME)-html.tar.gz
-	md5sum $(DISTNAME).tar.gz
-	md5sum $(PROGNAME)-html.tar.gz
+dist: ALL $(DISTNAME).tar.gz $(DISTNAME).zip $(PROGNAME)-html.tar.gz
+	sha256sum $(DISTNAME).tar.gz
+	sha256sum $(DISTNAME).zip
+	sha256sum $(PROGNAME)-html.tar.gz
 
 
 

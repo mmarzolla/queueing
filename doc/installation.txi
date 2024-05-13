@@ -158,7 +158,7 @@ you can download the tarball and unpack it somewhere:
 
 @example
 @kbd{tar xvfz queueing-@value{VERSION}.tar.gz}
-@kbd{cd queueing-@value{VERSION}/}
+@kbd{cd queueing/}
 @end example
 
 Copy all @code{.m} files from the @file{inst/} directory to some
