@@ -75,26 +75,26 @@ you can install @code{queueing} from Octave command prompt using this
 command:
 
 @example
-octave:1> @kbd{pkg install -forge queueing}
+octave:1> @kbd{pkg install pkg install "https://github.com/mmarzolla/queueing/releases/download/@value{VERSION}/queueing-@value{VERSION}.tar.gz"}
 @end example
 
 The command above will download and install the latest version of the
-@code{queueing} package from Octave Forge, and install it on your
-machine.
+@code{queueing} package from the source repository, and install it on
+your machine.
 
 If you do not have root access, you can perform a local install with:
 
 @example
-octave:1> @kbd{pkg install -local -forge queueing}
+octave:1> @kbd{pkg install -local "https://github.com/mmarzolla/queueing/releases/download/@value{VERSION}/queueing-@value{VERSION}.tar.gz"}
 @end example
 
 This will install @code{queueing} in your home directory, and the
 package will be available to the current user only.
 
 @item
-Alternatively, you can first download the @code{queueing} tarball from
-Octave-Forge; to install the package in the system-wide location
-issue this command at the Octave prompt:
+Alternatively, you can first download the @code{queueing} tarball; to
+install the package in the system-wide location issue this command at
+the Octave prompt:
 
 @example
 octave:1> @kbd{pkg install @emph{queueing-@value{VERSION}.tar.gz}}
@@ -158,7 +158,7 @@ you can download the tarball and unpack it somewhere:
 
 @example
 @kbd{tar xvfz queueing-@value{VERSION}.tar.gz}
-@kbd{cd queueing-@value{VERSION}/queueing/}
+@kbd{cd queueing-@value{VERSION}/}
 @end example
 
 Copy all @code{.m} files from the @file{inst/} directory to some

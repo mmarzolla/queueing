@@ -4,12 +4,12 @@ PROGNAME=queueing
 
 DISTNAME=$(PROGNAME)-$(VERSIONNUM)
 SUBDIRS=inst doc test devel
-DISTFILES=COPYING NEWS DESCRIPTION CITATION INDEX README INSTALL
+DISTFILES=COPYING NEWS DESCRIPTION CITATION INDEX README.md INSTALL
 DISTSUBDIRS=inst inst/private doc
 
 .PHONY: clean check
 
-ALL: DESCRIPTION doc/conf.texi
+ALL: DESCRIPTION queueing.yaml doc/conf.texi
 	for d in $(SUBDIRS); do \
 		$(MAKE) -C $$d ALL; \
 	done
@@ -25,7 +25,7 @@ DESCRIPTION: DESCRIPTION.in
 	sed "s/VERSIONNUM/$(VERSIONNUM)/g" | \
 	sed "s/VERSIONDATE/$(VERSIONDATE)/g" > $@
 
-octave.yaml: octave.yaml.in
+queueing.yaml: queueing.yaml.in
 	cat $< | \
 	sed "s/PROGNAME/$(PROGNAME)/g" | \
 	sed "s/VERSIONNUM/$(VERSIONNUM)/g" | \
