@@ -16,6 +16,10 @@ well as for single station queueing systems.
 This package requires GNU Octave version 4.0.0 or later. GNU Octave is
 free software and is available at https://www.gnu.org/software/octave/
 
+The Octave queueing toolbox is distributed under the terms of the GNU
+General Public License, version 3 or later. See the file `COPYING` for
+details.
+
 ## Download and install
 
 The Web pages of the queueing toolbox are
@@ -26,6 +30,16 @@ https://www.moreno.marzolla.name/software/queueing/
 
 where the latest version can be downloaded. See the installation
 instructions there.
+
+## Documentation
+
+The queueing toolbox comes with extensive documentation; here is the
+user manual in
+[pdf](https://www.moreno.marzolla.name/software/queueing/queueing.pdf)
+and
+[html](https://www.moreno.marzolla.name/software/queueing/queueing.html)
+format. Usage help for all functions is available through the `help`
+built-in command at the GNU Octave prompt. See the manual for details.
 
 ## Citation
 
@@ -57,17 +71,3 @@ A BibTeX entry for LaTeX users is:
     isbn      = {978-3-642-13567-5}
 }
 ```
-
-## Documentation
-
-The queueing toolbox comes with extensive documentation; here is the
-user manual in
-[pdf](https://www.moreno.marzolla.name/software/queueing/queueing.pdf)
-and
-[html](https://www.moreno.marzolla.name/software/queueing/queueing.html)
-format. Usage help for all functions is available through the `help`
-built-in command at the GNU Octave prompt. See the manual for details.
-
-The Octave queueing toolbox is distributed under the terms of the GNU
-General Public License, version 3 or later. See the file <COPYING> for
-details.
