@@ -36,7 +36,7 @@ versions:
 - id: "VERSIONNUM"
   date: "VERSIONDATE"
   sha256:
-  url: "https://github.com/mmarzolla/queueing/archive/PROGNAME-VERSIONNUM.tar.gz"
+  url: "https://github.com/mmarzolla/queueing/releases/download/VERSIONNUM/PROGNAME-VERSIONNUM.tar.gz"
   depends:
   - "octave (>= 4.0.0)"
   - "pkg"
