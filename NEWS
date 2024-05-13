@@ -9,7 +9,11 @@ Summary of important user-visible changes for queueing-1.2.8
 
 ** Fixed a few syntax errors
 
-** Fixed automatic generatin of PDF documentation
+** Fixed automatic generation of PDF documentation
+
+** Fixed documentation
+
+** Migrated source repository to GitHub
 
 
 Summary of important user-visible changes for queueing-1.2.7
