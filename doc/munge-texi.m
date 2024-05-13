@@ -40,6 +40,11 @@ function dump_help(func)
   ## Texinfo crashes if @end tex does not appear first on the line.
   text = regexprep (text, '^ +@end tex', '@end tex', 'lineanchors');
 
+  ## We use a custom "@seealso" macro that can not be redefined.
+  ## Hence we created a new "@xseealso" macro that must be used
+  ## whenever "@seealso" is encountered.
+  text = strrep(text, "@seealso", "@xseealso");
+
   printf("@anchor{doc-%s}\n%s\n", func, text);
 endfunction
 
@@ -68,10 +73,6 @@ while !feof(fid)
     if ( length(t) > 0 )
       dump_demo(t{1}{1},str2num(t{1}{2}));
     else
-      ## We use a custom "@seealso" macro that can not be redefined.
-      ## Hence we created a new "@xseealso" macro that must be used
-      ## whenever "@seealso" is encountered.
-      line = strrep(line, "@seealso", "@xseealso");
       printf("%s\n",line);
     endif
   endif
