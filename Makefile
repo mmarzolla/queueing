@@ -20,10 +20,16 @@ doc/conf.texi:
 	echo "@set VERSIONDATE $(VERSIONDATE)" >> doc/conf.texi
 
 DESCRIPTION: DESCRIPTION.in
-	cat DESCRIPTION.in | \
+	cat $< | \
 	sed "s/PROGNAME/$(PROGNAME)/g" | \
 	sed "s/VERSIONNUM/$(VERSIONNUM)/g" | \
-	sed "s/VERSIONDATE/$(VERSIONDATE)/g" > DESCRIPTION
+	sed "s/VERSIONDATE/$(VERSIONDATE)/g" > $@
+
+octave.yaml: octave.yaml.in
+	cat $< | \
+	sed "s/PROGNAME/$(PROGNAME)/g" | \
+	sed "s/VERSIONNUM/$(VERSIONNUM)/g" | \
+	sed "s/VERSIONDATE/$(VERSIONDATE)/g" > $@
 
 check:
 	$(MAKE) -C test check

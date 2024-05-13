@@ -12,31 +12,31 @@ description: >-
   occupancy probabilities, mean time to absorption, time-averaged
   sojourn times and so forth. Discrete- and continuous-time Markov
   chains are supported.
-icon:
+icon: https://github.com/mmarzolla/queueing/blob/master/doc/icon.png
 links:
 - icon: "far fa-copyright"
   label: "GPL-3.0-or-later"
-  url: "https://github.com/gnu-octave/queueing/blob/main/COPYING"
+  url: "https://github.com/mmarzolla/queueing/blob/master/COPYING"
 - icon: "fas fa-rss"
   label: "news"
-  url: "https://github.com/gnu-octave/queueing/releases/"
+  url: "https://github.com/mmarzolla/queueing/releases/"
 - icon: "fas fa-code-branch"
   label: "repository"
-  url: "https://github.com/gnu-octave/queueing/"
+  url: "https://github.com/mmarzolla/queueing/"
 - icon: "fas fa-book"
   label: "package documentation"
-  url: "https://github.com/gnu-octave/queueing/blob/main/README.md"
+  url: "https://github.com/mmarzolla/queueing/blob/master/README.md"
 - icon: "fas fa-bug"
   label: "report a problem"
-  url: "https://github.com/gnu-octave/queueing/issues"
+  url: "https://github.com/mmarzolla/queueing/issues"
 maintainers:
 - name: "Moreno Marzolla"
   contact: "moreno.marzolla@unibo.it"
 versions:
-- id: "1.2.8"
-  date: "2024-06-13"
-  sha256: "bff441755f0d68596f2efd027fe637b5b6c52b722ffd6255bdb8a5f34ab4ef2a"
-  url: "https://github.com/gnu-octave/queueing/archive/1.2.8.tar.gz"
+- id: "VERSIONNUM"
+  date: "VERSIONDATE"
+  sha256:
+  url: "https://github.com/mmarzolla/queueing/archive/PROGNAME-VERSIONNUM.tar.gz"
   depends:
   - "octave (>= 4.0.0)"
   - "pkg"
