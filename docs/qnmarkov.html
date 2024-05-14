@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qnmarkov</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qnmarkov</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnmarkov</b><i> (<var>lambda</var>, <var>S</var>, <var>C</var>, <var>P</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnmarkov</b><i> (<var>lambda</var>, <var>S</var>, <var>C</var>, <var>P</var>, <var>m</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnmarkov</b><i> (<var>N</var>, <var>S</var>, <var>C</var>, <var>P</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnmarkov</b><i> (<var>N</var>, <var>S</var>, <var>C</var>, <var>P</var>, <var>m</var>)</i></dt>
+</dl>
+
+ <a name="index-closed-network_002c-single-class"></a>
+ <a name="index-open-network_002c-single-class"></a>
+ <a name="index-closed-network_002c-finite-capacity"></a>
+ <a name="index-blocking-queueing-network"></a>
+ <a name="index-RS-blocking"></a>
+
+<p> Compute utilization, response time, average queue length and
+ throughput for open or closed queueing networks with finite capacity
+ and a single class of requests.
+ Blocking type is Repetitive-Service (RS). This function explicitly
+ generates and solve the underlying Markov chain, and thus might
+ require a large amount of memory.
+</p>
+<div class="ms-5">
+<p> More specifically, networks which can me analyzed by this
+ function have the following properties:
+</p>
+ <ul>
+<li> There exists only a single class of customers.
+
+ </li><li> The network has <math>K</math> service centers. Center
+ <math>k \in 1, &hellip;, K</math>
+ has <math>m_k &gt; 0</math> servers, and has a total (finite) capacity of
+ <math>C_k \geq m_k</math> which includes both buffer space and servers.
+ The buffer space at service center <math>k</math> is therefore
+ <math>C_k - m_k</math>.
+
+ </li><li> The network can be open, with external arrival rate to
+ center <math>k</math> equal to
+ <math>\lambda_k</math>, or closed with fixed
+ population size <math>N</math>. For closed networks, the population size
+ <math>N</math> must be strictly less than the network capacity:
+ <math>N &lt; \sum_k=1^K C_k</math>.
+
+ </li><li> Average service times are load-independent.
+
+ </li><li> <math>P_i, j</math> is the probability that requests completing
+ execution at center <math>i</math> are transferred to
+ center <math>j</math>, <math>i \neq j</math>. For open networks, a request may leave the system
+ from any node <math>i</math> with probability <math>1-\sum_j=1^K P_i, j</math>.
+
+ </li><li> Blocking type is Repetitive-Service (RS). Service
+ center <math>j</math> is <math>saturated</math> if the number of requests is equal
+ to its capacity <math>C_j</math>. Under the RS blocking discipline,
+ a request completing service at center <math>i</math> which is being
+ transferred to a saturated server <math>j</math> is put back at the end of
+ the queue of <math>i</math> and will receive service again. Center <math>i</math>
+ then processes the next request in queue. External arrivals to a
+ saturated servers are dropped.
+
+</li></ul>
+
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>lambda</var>(k)</code></dt>
+<dt> <code><var>N</var></code></dt>
+</dl>
+<p> If the first argument is a vector <var>lambda</var>, it is considered to be
+ the external arrival rate <code><var>lambda</var>(k) &ge; 0</code> to service center
+ <math>k</math> of an open network. If the first argument is a scalar, it is
+ considered as the population size <var>N</var> of a closed network; in this case
+ <var>N</var> must be strictly
+ less than the network capacity: <code><var>N</var> &lt; sum(<var>C</var>)</code>.
+</p>
+ </dd>
+<dt> <code><var>S</var>(k)</code></dt>
+</dl>
+<p> average service time at service center <math>k</math>
+</p>
+ </dd>
+<dt> <code><var>C</var>(k)</code></dt>
+</dl>
+<p> capacity of service center <math>k</math>. The capacity includes both
+ the buffer and server space <code><var>m</var>(k)</code>. Thus the buffer space is
+ <code><var>C</var>(k)-<var>m</var>(k)</code>.
+</p>
+ </dd>
+<dt> <code><var>P</var>(i,j)</code></dt>
+</dl>
+<p> transition probability from service center
+ <math>i</math> to service center <math>j</math>.
+</p>
+ </dd>
+<dt> <code><var>m</var>(k)</code></dt>
+</dl>
+<p> number of servers at service center
+ <math>k</math>. Note that <code><var>m</var>(k) &ge; <var>C</var>(k)</code> for each <var>k</var>.
+ If <var>m</var> is omitted, all service centers are assumed to have a
+ single server (<code><var>m</var>(k) = 1</code> for all <math>k</math>).
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var>(k)</code></dt>
+</dl>
+<p> center <math>k</math> utilization.
+</p>
+ </dd>
+<dt> <code><var>R</var>(k)</code></dt>
+</dl>
+<p> response time on service center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>Q</var>(k)</code></dt>
+</dl>
+<p> average number of customers in the
+ service center <math>k</math>, <math>including</math> the request in service.
+</p>
+ </dd>
+<dt> <code><var>X</var>(k)</code></dt>
+</dl>
+<p> throughput of service center <math>k</math>.
+</p>
+</dd>
+</dl>
+
+<p> <strong>NOTES</strong>
+</p>
+<p> The space complexity of this implementation is <math>O(\prod_k=1^K (C_k + 1)^2)</math>. The time complexity is dominated by
+ the time needed to solve a linear system with <math>\prod_k=1^K (C_k + 1)</math> unknowns.
+</p>
+
+</div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

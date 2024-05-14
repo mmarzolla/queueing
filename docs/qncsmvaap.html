@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qncsmvaap</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qncsmvaap</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncsmvaap</b><i> (<var>N</var>, <var>S</var>, <var>V</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncsmvaap</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncsmvaap</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>, <var>Z</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncsmvaap</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>, <var>Z</var>, <var>tol</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncsmvaap</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>, <var>Z</var>, <var>tol</var>, <var>iter_max</var>)</i></dt>
+</dl>
+
+ <a name="index-Mean-Value-Analysys-_0028MVA_0029_002c-approximate"></a>
+ <a name="index-MVA_002c-approximate"></a>
+ <a name="index-approximate-MVA"></a>
+ <a name="index-closed-network_002c-single-class"></a>
+ <a name="index-closed-network_002c-approximate-analysis"></a>
+
+<p> Analyze closed, single class queueing networks using the Approximate
+ Mean Value Analysis (MVA) algorithm. This function is based on
+ approximating the number of customers seen at center <math>k</math> when a
+ new request arrives as <math>Q_k(N) \times (N-1)/N</math>. This function
+ only handles single-server and delay centers; if your network
+ contains general load-dependent service centers, use the function
+ <code>qncsmvald</code> instead.
+</p>
+<div class="ms-5">
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>N</var></code></dt>
+</dl>
+<p> Population size (number of requests in the system, <code><var>N</var> &gt; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>S</var>(k)</code></dt>
+</dl>
+<p> mean service time on server <math>k</math>
+ (<code><var>S</var>(k)&gt;0</code>).
+</p>
+ </dd>
+<dt> <code><var>V</var>(k)</code></dt>
+</dl>
+<p> average number of visits to service center
+ <math>k</math> (<code><var>V</var>(k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>m</var>(k)</code></dt>
+</dl>
+<p> number of servers at center <math>k</math>
+ (if <var>m</var> is a scalar, all centers have that number of servers). If
+ <code><var>m</var>(k) &lt; 1</code>, center <math>k</math> is a delay center (IS); if
+ <code><var>m</var>(k) == 1</code>, center <math>k</math> is a regular queueing
+ center (FCFS, LCFS-PR or PS) with one server (default). This function
+ does not support multiple server nodes (<code><var>m</var>(k) &gt; 1</code>).
+</p>
+ </dd>
+<dt> <code><var>Z</var></code></dt>
+</dl>
+<p> External delay for customers (<code><var>Z</var> &ge; 0</code>). Default is 0.
+</p>
+ </dd>
+<dt> <code><var>tol</var></code></dt>
+</dl>
+<p> Stopping tolerance. The algorithm stops when the maximum relative
+ difference between the new and old value of the queue lengths
+ <var>Q</var> becomes less than the tolerance. Default is <math>10^-5</math>.
+</p>
+ </dd>
+<dt> <code><var>iter_max</var></code></dt>
+</dl>
+<p> Maximum number of iterations (<code><var>iter_max</var>&gt;0</code>.
+ The function aborts if convergenge is not reached within the maximum
+ number of iterations. Default is 100.
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var>(k)</code></dt>
+</dl>
+<p> If <math>k</math> is a FCFS, LCFS-PR or PS node (<code><var>m</var>(k) == 1</code>),
+ then <code><var>U</var>(k)</code> is the utilization of center <math>k</math>. If
+ <math>k</math> is an IS node (<code><var>m</var>(k) &lt; 1</code>), then
+ <code><var>U</var>(k)</code> is the <math>traffic intensity</math> defined as
+ <code><var>X</var>(k)*<var>S</var>(k)</code>.
+</p>
+ </dd>
+<dt> <code><var>R</var>(k)</code></dt>
+</dl>
+<p> response time at center <math>k</math>.
+ The system response time <var>Rsys</var>
+ can be computed as <code><var>Rsys</var> = <var>N</var>/<var>Xsys</var> - Z</code>
+</p>
+ </dd>
+<dt> <code><var>Q</var>(k)</code></dt>
+</dl>
+<p> average number of requests at center <math>k</math>. The number of
+ requests in the system can be computed either as
+ <code>sum(<var>Q</var>)</code>, or using the formula
+ <code><var>N</var>-<var>Xsys</var>*<var>Z</var></code>.
+</p>
+ </dd>
+<dt> <code><var>X</var>(k)</code></dt>
+</dl>
+<p> center <math>k</math> throughput. The system throughput <var>Xsys</var> can be
+ computed as <code><var>Xsys</var> = <var>X</var>(1) / <var>V</var>(1)</code>
+</p>
+</dd>
+</dl>
+
+<p> <strong>REFERENCES</strong>
+</p>
+<p> This implementation is based on Edward D. Lazowska, John Zahorjan,
+ G. Scott Graham, and Kenneth C. Sevcik, <cite>Quantitative System
+ Performance: Computer System Analysis Using Queueing Network Models</cite>,
+ Prentice Hall,
+ 1984. <a href="http://www.cs.washington.edu/homes/lazowska/qsp/">http://www.cs.washington.edu/homes/lazowska/qsp/</a>. In
+ particular, see section 6.4.2.2 (&quot;Approximate Solution Techniques&quot;).
+</p>
+<p> <strong>See also: </strong>
+  <a href="qncsmva.html">qncsmva</a>, 
+  <a href="qncsmvald.html">qncsmvald</a>
+</p>
+</div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ S = [ 0.125 0.3 0.2 ];
+ V = [ 16 10 5 ];
+ N = 30;
+ m = ones(1,3);
+ Z = 4;
+ Xmva = Xapp = Rmva = Rapp = zeros(1,N);
+ for n=1:N
+   [U R Q X] = qncsmva(n,S,V,m,Z);
+   Xmva(n) = X(1)/V(1);
+   Rmva(n) = dot(R,V);
+   [U R Q X] = qncsmvaap(n,S,V,m,Z);
+   Xapp(n) = X(1)/V(1);
+   Rapp(n) = dot(R,V);
+ endfor
+ subplot(2,1,1);
+ plot(1:N, Xmva, ";Exact;", "linewidth", 2, 1:N, Xapp, "x;Approximate;", "markersize", 7);
+ legend("location","southeast"); legend("boxoff");
+ ylabel("Throughput X(n)");
+ subplot(2,1,2);
+ plot(1:N, Rmva, ";Exact;", "linewidth", 2, 1:N, Rapp, "x;Approximate;", "markersize", 7);
+ legend("location","southeast"); legend("boxoff");
+ ylabel("Response Time R(n)");
+ xlabel("Number of Requests n");
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/qncsmvaap_101.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

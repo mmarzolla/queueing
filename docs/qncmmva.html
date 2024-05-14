@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qncmmva</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qncmmva</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncmmva</b><i> (<var>N</var>, <var>S</var> )</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncmmva</b><i> (<var>N</var>, <var>S</var>, <var>V</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncmmva</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncmmva</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>, <var>Z</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncmmva</b><i> (<var>N</var>, <var>S</var>, <var>P</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncmmva</b><i> (<var>N</var>, <var>S</var>, <var>P</var>, <var>r</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qncmmva</b><i> (<var>N</var>, <var>S</var>, <var>P</var>, <var>r</var>, <var>m</var>)</i></dt>
+</dl>
+
+ <a name="index-Mean-Value-Analysys-_0028MVA_0029"></a>
+ <a name="index-closed-network_002c-multiple-classes"></a>
+ <a name="index-multiclass-network_002c-closed"></a>
+
+<p> Compute steady-state performance measures for closed, multiclass
+ queueing networks using the Mean Value Analysys (MVA) algorithm.
+</p>
+<div class="ms-5">
+<p> Queueing policies at service centers can be any of the following:
+</p>
+ <dl compact="compact">
+<dt> <strong>FCFS</strong></dt>
+</dl>
+<p> (First-Come-First-Served) customers are served in order of arrival;
+ multiple servers are allowed. For this kind of queueing discipline,
+ average service times must be class-independent.
+</p>
+ </dd>
+<dt> <strong>PS</strong></dt>
+</dl>
+<p> (Processor Sharing) customers are served in parallel by a single
+ server, each customer receiving an equal share of the service rate.
+</p>
+ </dd>
+<dt> <strong>LCFS-PR</strong></dt>
+</dl>
+<p> (Last-Come-First-Served, Preemptive Resume) customers are served in
+ reverse order of arrival by a single server and the last arrival
+ preempts the customer in service who will later resume service at the
+ point of interruption.
+</p>
+ </dd>
+<dt> <strong>IS</strong></dt>
+</dl>
+<p> (Infinite Server) customers are delayed independently of other
+ customers at the service center (there is effectively an infinite
+ number of servers).
+</p>
+</dd>
+</dl>
+
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>N</var>(c)</code></dt>
+</dl>
+<p> number of class <math>c</math> requests; <code><var>N</var>(c) &ge; 0</code>. If
+ class <math>c</math> has no requests (<code><var>N</var>(c) == 0</code>), then for
+ all <var>k</var>, this function returns
+ <code><var>U</var>(c,k) = <var>R</var>(c,k) = <var>Q</var>(c,k) = <var>X</var>(c,k) = 0</code>
+</p>
+ </dd>
+<dt> <code><var>S</var>(c,k)</code></dt>
+</dl>
+<p> mean service time for class <math>c</math> requests at center <math>k</math>
+ (<code><var>S</var>(c,k) &ge; 0</code>). If the service time at center
+ <math>k</math> is class-dependent, then center <math>k</math> is assumed
+ to be of type <math>-/G/1</math>&ndash;PS (Processor Sharing). If center
+ <math>k</math> is a FCFS node (<code><var>m</var>(k)&gt;1</code>), then the service
+ times <strong>must</strong> be class-independent, i.e., all classes
+ <strong>must</strong> have the same service time.
+</p>
+ </dd>
+<dt> <code><var>V</var>(c,k)</code></dt>
+</dl>
+<p> average number of visits of class <math>c</math> requests at
+ center <math>k</math>; <code><var>V</var>(c,k) &ge; 0</code>, default is 1.
+ <strong>If you pass this argument, class switching is not allowed</strong>
+</p>
+ </dd>
+<dt> <code><var>P</var>(r,i,s,j)</code></dt>
+</dl>
+<p> probability that a class <math>r</math> request completing service at center
+ <math>i</math> is routed to center <math>j</math> as a class <math>s</math> request; the
+ reference stations for each class are specified with the paramter
+ <var>r</var>. <strong>If you pass argument <var>P</var>, class switching is
+ allowed</strong>; however, you can not specify any external delay (i.e.,
+ <var>Z</var> must be zero) and all servers must be fixed-rate or
+ infinite-server nodes (<code><var>m</var>(k) &le; 1</code> for all
+ <math>k</math>).
+</p>
+ </dd>
+<dt> <code><var>r</var>(c)</code></dt>
+</dl>
+<p> reference station for class <math>c</math>. If omitted, station 1 is the
+ reference station for all classes. See <code>qncmvisits</code>.
+</p>
+ </dd>
+<dt> <code><var>m</var>(k)</code></dt>
+</dl>
+<p> If <code><var>m</var>(k)&lt;1</code>, then center <math>k</math> is assumed to be a delay
+ center (IS node <math>-/G/\infty</math>). If <code><var>m</var>(k)==1</code>, then
+ service center <math>k</math> is a regular queueing center
+ (<math>M/M/1</math>&ndash;FCFS, <math>-/G/1</math>&ndash;LCFS-PR or <math>-/G/1</math>&ndash;PS).
+ Finally, if <code><var>m</var>(k)&gt;1</code>, center <math>k</math> is a
+ <math>M/M/m</math>&ndash;FCFS center with <code><var>m</var>(k)</code> identical servers.
+ Default is <code><var>m</var>(k)=1</code> for each <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>Z</var>(c)</code></dt>
+</dl>
+<p> class <math>c</math> external delay (think time); <code><var>Z</var>(c) &ge;
+ 0</code>. Default is 0. This parameter can not be used if you pass a
+ routing matrix as the second parameter of <code>qncmmva</code>.
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var>(c,k)</code></dt>
+</dl>
+<p> If <math>k</math> is a FCFS, LCFS-PR or PS node (<code><var>m</var>(k) &ge;
+ 1</code>), then <code><var>U</var>(c,k)</code> is the class <math>c</math> utilization at
+ center <math>k</math>, <math>0 &le; U(c,k) &le; 1</math>. If <math>k</math> is an
+ IS node, then <code><var>U</var>(c,k)</code> is the class <math>c</math> <math>traffic
+ intensity</math> at center <math>k</math>, defined as <code><var>U</var>(c,k) =
+ <var>X</var>(c,k)*<var>S</var>(c,k)</code>. In this case the value of
+ <code><var>U</var>(c,k)</code> may be greater than one.
+</p>
+ </dd>
+<dt> <code><var>R</var>(c,k)</code></dt>
+</dl>
+<p> class <math>c</math> response time at center <math>k</math>. The class <math>c</math>
+ <math>residence time</math> at center <math>k</math> is <code><var>R</var>(c,k) *
+ <var>C</var>(c,k)</code>. The total class <math>c</math> system response time is
+ <code>dot(<var>R</var>, <var>V</var>, 2)</code>.
+</p>
+ </dd>
+<dt> <code><var>Q</var>(c,k)</code></dt>
+</dl>
+<p> average number of class <math>c</math> requests at center <math>k</math>. The
+ total number of requests at center <math>k</math> is
+ <code>sum(<var>Q</var>(:,k))</code>. The total number of class <math>c</math>
+ requests in the system is <code>sum(<var>Q</var>(c,:))</code>.
+</p>
+ </dd>
+<dt> <code><var>X</var>(c,k)</code></dt>
+</dl>
+<p> class <math>c</math> throughput at center <math>k</math>. The class <math>c</math>
+ throughput can be computed as <code><var>X</var>(c,1) / <var>V</var>(c,1)</code>.
+</p>
+</dd>
+</dl>
+
+<p> <strong>NOTES</strong>
+</p>
+<p> If the function call specifies the visit ratios <var>V</var>, then class
+ switching is <strong>not</strong> allowed. If the function call specifies
+ the routing probability matrix <var>P</var>, then class switching
+ <strong>is</strong> allowed; however, in this case all nodes are restricted
+ to be fixed rate servers or delay centers: multiple-server and
+ general load-dependent centers are not supported.
+</p>
+<p> In presence of load-dependent servers (e.g., if <code><var>m</var>(i)&gt;1</code>
+ for some <math>i</math>), the MVA algorithm is known to be numerically
+ unstable. Generally this problem shows up as negative values for the
+ computed response times or utilizations. This is not a problem with the
+ <code>queueing</code> package, but with the MVA algorithm;
+ as such, there is no known workaround at the moment (aoart from using a
+ different solution technique, if available). This function prints a
+ warning if it detects numerical problems; you can disable the warning
+ with the command <code>warning(&quot;off&quot;, &quot;qn:numerical-instability&quot;)</code>.
+</p>
+<p> Given a network with <math>K</math> service centers, <math>C</math> job classes
+ and population vector <math>\bf N=\left[N_1, &hellip;, N_C\right]</math>, the MVA
+ algorithm requires space <math>O(C \prod_i (N_i + 1))</math>. The time
+ complexity is <math>O(CK\prod_i (N_i + 1))</math>. This implementation is
+ slightly more space-efficient (see details in the code). While the
+ space requirement can be mitigated by using some optimizations, the
+ time complexity can not. If you need to analyze large closed networks
+ you should consider the <code>qncmmvaap</code> function, which implements
+ the approximate MVA algorithm. Note however that <code>qncmmvaap</code>
+ will only provide approximate results.
+</p>
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ M. Reiser and S. S. Lavenberg, <cite>Mean-Value Analysis of Closed
+ Multichain Queuing Networks</cite>, Journal of the ACM, vol. 27, n. 2, April
+ 1980, pp. 313&ndash;322. <a href="http://doi.acm.org/10.1145/322186.322195">10.1145/322186.322195</a>
+ </li></ul>
+
+<p> This implementation is based on G. Bolch, S. Greiner, H. de Meer and
+ K. Trivedi, <cite>Queueing Networks and Markov Chains: Modeling and
+ Performance Evaluation with Computer Science Applications</cite>, Wiley,
+ 1998 and Edward D. Lazowska, John Zahorjan, G. Scott Graham, and
+ Kenneth C. Sevcik, <cite>Quantitative System Performance: Computer
+ System Analysis Using Queueing Network Models</cite>, Prentice Hall,
+ 1984. <a href="http://www.cs.washington.edu/homes/lazowska/qsp/">http://www.cs.washington.edu/homes/lazowska/qsp/</a>. In
+ particular, see section 7.4.2.1 (&quot;Exact Solution Techniques&quot;).
+</p>
+<p> <strong>See also: </strong>
+  <a href="qnclosed.html">qnclosed</a>, 
+qncmmvaapprox, 
+  <a href="qncmvisits.html">qncmvisits</a>
+</p>
+</div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ Ntot = 100; # total population size
+ b = linspace(0.1,0.9,10); # fractions of class-1 requests
+ S = [20 80 31 14 23 12; ...
+      90 30 33 20 14 7];
+ V = ones(size(S));
+ X1 = X1 = XX = zeros(size(b));
+ R1 = R2 = RR = zeros(size(b));
+ for i=1:length(b)
+   N = [fix(b(i)*Ntot) Ntot-fix(b(i)*Ntot)];
+   # printf("[%3d %3d]\n", N(1), N(2) );
+   [U R Q X] = qncmmva( N, S, V );
+   X1(i) = X(1,1) / V(1,1);
+   X2(i) = X(2,1) / V(2,1);
+   XX(i) = X1(i) + X2(i);
+   R1(i) = dot(R(1,:), V(1,:));
+   R2(i) = dot(R(2,:), V(2,:));
+   RR(i) = Ntot / XX(i);
+ endfor
+ subplot(2,1,1);
+ plot(b, X1, ";Class 1;", "linewidth", 2, ...
+      b, X2, ";Class 2;", "linewidth", 2, ...
+      b, XX, ";System;", "linewidth", 2 );
+ legend("location","south"); legend("boxoff");
+ ylabel("Throughput");
+ subplot(2,1,2);
+ plot(b, R1, ";Class 1;", "linewidth", 2, ...
+      b, R2, ";Class 2;", "linewidth", 2, ...
+      b, RR, ";System;", "linewidth", 2 );
+ legend("location","south"); legend("boxoff");
+ xlabel("Population mix \\beta for Class 1");
+ ylabel("Resp. Time");
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/qncmmva_101.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 2
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ S = [1 0 .025; 0 15 .5];
+ P = zeros(2,3,2,3);
+ P(1,1,1,3) = P(1,3,1,1) = 1;
+ P(2,2,2,3) = P(2,3,2,2) = 1;
+ V = qncmvisits(P,[3 3]); # reference station is station 3
+ N = [15 5];
+ m = [-1 -1 1];
+ [U R Q X] = qncmmva(N,S,V,m)
+
+U =
+
+   14.3231         0    0.3581
+         0    4.7070    0.1569
+
+R =
+
+    1.0000         0    0.0473
+         0   15.0000    0.9337
+
+Q =
+
+   14.3231         0    0.6769
+         0    4.7070    0.2930
+
+X =
+
+   14.3231         0   14.3231
+         0    0.3138    0.3138
+
+                    </pre></td></tr></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 3
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ C = 2; K = 3;
+ S = [.01 .07 .10; ...
+      .05 .07 .10 ];
+ P = zeros(C,K,C,K);
+ P(1,1,1,2) = .7; P(1,1,1,3) = .2; P(1,1,2,1) = .1;
+ P(2,1,2,2) = .3; P(2,1,2,3) = .5; P(2,1,1,1) = .2;
+ P(1,2,1,1) = P(2,2,2,1) = 1;
+ P(1,3,1,1) = P(2,3,2,1) = 1;
+ N = [3 0];
+ [U R Q X] = qncmmva(N, S, P)
+
+U =
+
+   0.1261   0.6178   0.2522
+   0.3152   0.1324   0.3152
+
+R =
+
+   0.014653   0.133148   0.163256
+   0.073266   0.133148   0.163256
+
+Q =
+
+   0.1848   1.1752   0.4117
+   0.4619   0.2518   0.5146
+
+X =
+
+   12.6089    8.8262    2.5218
+    6.3044    1.8913    3.1522
+
+                    </pre></td></tr></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 4
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ S = [10 7 5 4;
+      5  2 4 6];
+ NN = 100;
+ Xl_aba = Xu_aba = Xl_bsb = Xu_bsb = Xl_cb = Xu_cb = Xmva = Rmva = zeros(NN,2);
+ for n=1:NN
+   N=[n,10];
+   [a b] = qncmaba(N,S);
+   Xl_aba(n,:) = a; Xu_aba(n,:) = b;
+   [a b] = qncmbsb(N,S);
+   Xl_bsb(n,:) = a; Xu_bsb(n,:) = b;
+   [a b] = qncmcb(N,S);
+   Xl_cb(n,:) = a; Xu_cb(n,:) = b;
+   [U R Q X] = qncmmva(N,S,ones(size(S)));
+   Xmva(n,:) = X(:,1)';
+ endfor
+ subplot(1,2,1);
+ plot(1:NN, Xl_aba(:,1), "--k",
+      1:NN, Xu_aba(:,1), "--k;ABA;",
+      1:NN, Xu_bsb(:,1), ":k;BSB;",
+      1:NN, Xl_cb(:,1), "-.k",
+      1:NN, Xu_cb(:,1), "-.k;CB;",
+      1:NN, Xmva(:,1), "k;MVA;", "linewidth", 2);
+ xlabel("N. of requests");
+ ylim([0, 0.2]);
+ title("Class 1 throughput"); legend("boxoff");
+ subplot(1,2,2);
+ plot(1:NN, Xl_aba(:,2), "--k",
+      1:NN, Xu_aba(:,2), "--k;ABA;",
+      1:NN, Xu_bsb(:,2), ":k;BSB;",
+      1:NN, Xl_cb(:,2), "-.k",
+      1:NN, Xu_cb(:,2), "-.k;CB;",
+      1:NN, Xmva(:,2), "-k;MVA;", "linewidth", 2);
+ xlabel("N. of requests");
+ ylim([0, 0.2]);
+ title("Class 2 throughput");
+ legend("boxoff");
+ legend("location", "east");
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/qncmmva_401.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

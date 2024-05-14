@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: dtmc</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Discrete-time Markov chains">
+                    <i class="fas fa-list-alt"></i>
+                    Discrete-time Markov chains
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>dtmc</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> <var>p</var> = <b>dtmc</b><i> (<var>P</var>)</i></dt>
+<dt><u>Function File:</u> <var>p</var> = <b>dtmc</b><i> (<var>P</var>, <var>n</var>, <var>p0</var>)</i></dt>
+</dl>
+
+ <a name="index-Markov-chain_002c-discrete-time"></a>
+ <a name="index-discrete-time-Markov-chain"></a>
+ <a name="index-DTMC"></a>
+ <a name="index-Markov-chain_002c-stationary-probabilities"></a>
+ <a name="index-Markov-chain_002c-transient-probabilities"></a>
+
+<p> Compute stationary or transient state occupancy probabilities for a discrete-time Markov chain.
+</p>
+<div class="ms-5">
+<p> With a single argument, compute the stationary state occupancy
+ probabilities <code><var>p</var>(1), &hellip;, <var>p</var>(N)</code> for a
+ discrete-time Markov chain with finite state space <math>1, &hellip;,
+ N</math> and with <math>N \times N</math> transition matrix
+ <var>P</var>. With three arguments, compute the transient state occupancy
+ probabilities <code><var>p</var>(1), &hellip;, <var>p</var>(N)</code> that the system is in
+ state <math>i</math> after <var>n</var> steps, given initial occupancy
+ probabilities <var>p0</var>(1), &hellip;, <var>p0</var>(N).
+</p>
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>P</var>(i,j)</code></dt>
+</dl>
+<p> transition probabilities from state <math>i</math> to state <math>j</math>.
+ <var>P</var> must be an <math>N \times N</math> irreducible stochastic matrix,
+ meaning that the sum of each row must be 1 (<math>\sum_j=1^N
+ P_i, j = 1</math>), and the rank of <var>P</var> must be <math>N</math>.
+</p>
+ </dd>
+<dt> <code><var>n</var></code></dt>
+</dl>
+<p> Number of transitions after which state occupancy probabilities are computed
+ (scalar, <math>n &ge; 0</math>)
+</p>
+ </dd>
+<dt> <code><var>p0</var>(i)</code></dt>
+</dl>
+<p> probability that at step 0 the system is in state <math>i</math> (vector
+ of length <math>N</math>).
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>p</var>(i)</code></dt>
+</dl>
+<p> If this function is called with a single argument, <code><var>p</var>(i)</code>
+ is the steady-state probability that the system is in state <math>i</math>.
+ If this function is called with three arguments, <code><var>p</var>(i)</code>
+ is the probability that the system is in state <math>i</math>
+ after <var>n</var> transitions, given the probabilities
+ <code><var>p0</var>(i)</code> that the initial state is <math>i</math>.
+</p>
+</dd>
+</dl>
+
+<p> <strong>See also: </strong>
+  <a href="ctmc.html">ctmc</a>
+</p>
+</div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ P = zeros(9,9);
+ P(1,[2 4]    ) = 1/2;
+ P(2,[1 5 3]  ) = 1/3;
+ P(3,[2 6]    ) = 1/2;
+ P(4,[1 5 7]  ) = 1/3;
+ P(5,[2 4 6 8]) = 1/4;
+ P(6,[3 5 9]  ) = 1/3;
+ P(7,[4 8]    ) = 1/2;
+ P(8,[7 5 9]  ) = 1/3;
+ P(9,[6 8]    ) = 1/2;
+ p = dtmc(P);
+ disp(p)
+
+ Columns 1 through 7:
+
+   0.083333   0.125000   0.083333   0.125000   0.166667   0.125000   0.083333
+
+ Columns 8 and 9:
+
+   0.125000   0.083333
+                    </pre></td></tr></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 2
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ a = 0.2;
+ b = 0.15;
+ P = [ 1-a a; b 1-b];
+ T = 0:14;
+ pp = zeros(2,length(T));
+ for i=1:length(T)
+   pp(:,i) = dtmc(P,T(i),[1 0]);
+ endfor
+ ss = dtmc(P); # compute steady state probabilities
+ plot( T, pp(1,:), "b+;p_0(t);", "linewidth", 2, ...
+       T, ss(1)*ones(size(T)), "b;Steady State;", ...
+       T, pp(2,:), "r+;p_1(t);", "linewidth", 2, ...
+       T, ss(2)*ones(size(T)), "r;Steady State;" );
+ xlabel("Time Step");
+ legend("boxoff");
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/dtmc_201.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

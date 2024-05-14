@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qsammm</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Single Station Queueing Systems">
+                    <i class="fas fa-list-alt"></i>
+                    Single Station Queueing Systems
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qsammm</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qsammm</b><i> (<var>lambda</var>, <var>mu</var>)</i></dt>
+</dl>
+
+ <a name="index-asymmetric-M_002fM_002fm-system"></a>
+
+<p> Compute <math>appro&times;imate</math> utilization, response time, average
+ number of requests in service and throughput for an asymmetric
+ <math>M/M/m</math> queue. In this type of system there are <math>m</math> different
+ servers connected to a single queue. Each server has its own
+ (possibly different) service rate. If there is more than one server
+ available, requests are routed to a randomly-chosen one.
+</p>
+<div class="ms-5">
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>lambda</var></code></dt>
+</dl>
+<p> Arrival rate (<code><var>lambda</var>&gt;0</code>)
+</p>
+ </dd>
+<dt> <code><var>mu</var></code></dt>
+</dl>
+<p> <code><var>mu</var>(i)</code> is the service rate of server
+ <math>i</math>, <math>1 &le; i &le; m</math>.
+ The system must be ergodic (<code><var>lambda</var> &lt; sum(<var>mu</var>)</code>).
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var></code></dt>
+</dl>
+<p> Approximate service center utilization,
+ <math>U = \lambda / ( \sum_i=1^m \mu_i )</math>.
+</p>
+ </dd>
+<dt> <code><var>R</var></code></dt>
+</dl>
+<p> Approximate service center response time
+</p>
+ </dd>
+<dt> <code><var>Q</var></code></dt>
+</dl>
+<p> Approximate number of requests in the system
+</p>
+ </dd>
+<dt> <code><var>X</var></code></dt>
+</dl>
+<p> Approximate system throughput. If the system is ergodic,
+ <code><var>X</var> = <var>lambda</var></code>
+</p>
+</dd>
+</dl>
+
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ G. Bolch, S. Greiner, H. de Meer and K. Trivedi, <cite>Queueing Networks
+ and Markov Chains: Modeling and Performance Evaluation with Computer
+ Science Applications</cite>, Wiley, 1998
+ </li></ul>
+
+<p> <strong>See also: </strong>
+  <a href="qsmmm.html">qsmmm</a>
+</p>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

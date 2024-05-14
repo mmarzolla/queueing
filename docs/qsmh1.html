@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qsmh1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Single Station Queueing Systems">
+                    <i class="fas fa-list-alt"></i>
+                    Single Station Queueing Systems
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qsmh1</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>, <var>p0</var>] = <b>qsmh1</b><i> (<var>lambda</var>, <var>mu</var>, <var>alpha</var>)</i></dt>
+</dl>
+
+ <a name="index-M_002fH_005fm_002f1-system"></a>
+
+<p> Compute utilization, response time, average number of requests and
+ throughput for a <math>M/H_m/1</math> system. In this system, the customer
+ service times have hyper-exponential distribution:
+</p>
+<div class="ms-5">
+<p> $$ B(x) = \sum_{j=1}^m \alpha_j(1-e^{-\mu_j x}),\quad x>0 $$
+</p>
+ 
+<p> where <math>\alpha_j</math> is the probability that the request is served
+ at phase <math>j</math>, in which case the average service rate is
+ <math>\mu_j</math>. After completing service at phase <math>j</math>, for
+ some <math>j</math>, the request exits the system.
+</p>
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>lambda</var></code></dt>
+</dl>
+<p> Arrival rate
+</p>
+ </dd>
+<dt> <code><var>mu</var></code></dt>
+</dl>
+<p> <code><var>mu</var>(j)</code> is the phase <math>j</math> service rate. The total
+ number of phases <math>m</math> is <code>length(<var>mu</var>)</code>.
+</p>
+ </dd>
+<dt> <code><var>alpha</var></code></dt>
+</dl>
+<p> <code><var>alpha</var>(j)</code> is the probability that a request
+ is served at phase <math>j</math>. <var>alpha</var> must have the same size
+ as <var>mu</var>.
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var></code></dt>
+</dl>
+<p> Service center utilization
+</p>
+ </dd>
+<dt> <code><var>R</var></code></dt>
+</dl>
+<p> Service center response time
+</p>
+ </dd>
+<dt> <code><var>Q</var></code></dt>
+</dl>
+<p> Average number of requests in the system
+</p>
+ </dd>
+<dt> <code><var>X</var></code></dt>
+</dl>
+<p> Service center throughput
+</p>
+</dd>
+</dl>
+
+
+</div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

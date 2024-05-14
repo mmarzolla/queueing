@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=https://gnu-octave.github.io/packages/queueing>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-2 mb-2 mb-sm-0">
+              <img src="assets/queueing.png" class="d-block m-auto" alt="queueing">
+            </div>
+            <div class="col-sm-9 col-md-10">
+              <h3 class="d-inline-block mr-2">queueing</h3>
+              <b>1.2.8&nbsp;2024-05-13</b>
+              <p class="indent">
+                The queueing package provides functions for queueing  networks and Markov chains analysis. This package can be used to  compute steady-state performance measures for open, closed and mixed  networks with single or multiple job classes. Mean Value Analysis  (MVA), convolution, and various bounding techniques are  implemented. Furthermore, several transient and steady-state  performance measures for Markov chains can be computed, such as state  occupancy probabilities, mean time to absorption, time-averaged  sojourn times and so forth. Discrete- and continuous-time Markov  chains are supported.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+           <p>Select Category:
+             <select name="cat" onchange="location = this.options[this.selectedIndex].value;">
+             <option value="#Discrete-time Markov chains">Discrete-time Markov chains</option>
+             <option value="#Continuous-time Markov chains">Continuous-time Markov chains</option>
+             <option value="#Single Station Queueing Systems">Single Station Queueing Systems</option>
+             <option value="#Queueing Networks">Queueing Networks</option>
+             <option value="#Bounds Analysis">Bounds Analysis</option>
+             </select>
+           <p>
+
+           <h3 class="category">
+             <a name="Discrete-time Markov chains">Discrete-time Markov chains</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dtmcchkP.html">dtmcchkP</a>
+                   </code></b>
+                 </td>
+                 <td>Check whether P is a valid transition probability matrix.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dtmc.html">dtmc</a>
+                   </code></b>
+                 </td>
+                 <td>Compute stationary or transient state occupancy probabilities for a
+discrete-time Markov chain.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dtmcbd.html">dtmcbd</a>
+                   </code></b>
+                 </td>
+                 <td>Returns the transition probability matrix P for a discrete birth-death
+process over state space {1, ..., N}.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dtmcexps.html">dtmcexps</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the expected number of visits to each state during the first N
+transitions, or until abrosption.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dtmcisir.html">dtmcisir</a>
+                   </code></b>
+                 </td>
+                 <td>Check if P is irreducible, and identify Strongly Connected Components
+(SCC) in the transition graph of the DTMC with transition matrix P.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dtmctaexps.html">dtmctaexps</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the _time-averaged sojourn times_ 'M(i)', defined as the
+fraction of time spent in state i during the first n transitions (or
+until absorption), assuming that the state occupancy probabilities at
+time 0 are P0.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dtmcmtta.html">dtmcmtta</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the expected number of steps before absorption for a DTMC with
+state space {1, ..., N} and transition probability matrix P.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dtmcfpt.html">dtmcfpt</a>
+                   </code></b>
+                 </td>
+                 <td>Compute mean first passage times and mean recurrence times for an
+irreducible discrete-time Markov chain over the state space {1, ..., N}.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Continuous-time Markov chains">Continuous-time Markov chains</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ctmcchkQ.html">ctmcchkQ</a>
+                   </code></b>
+                 </td>
+                 <td>If Q is a valid infinitesimal generator matrix, return the size (number
+of rows or columns) of Q.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ctmc.html">ctmc</a>
+                   </code></b>
+                 </td>
+                 <td>Compute stationary or transient state occupancy probabilities for a
+continuous-time Markov chain.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ctmcbd.html">ctmcbd</a>
+                   </code></b>
+                 </td>
+                 <td>Returns the infinitesimal generator matrix Q for a continuous
+birth-death process over the finite state space {1, ..., N}.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ctmcexps.html">ctmcexps</a>
+                   </code></b>
+                 </td>
+                 <td>With three arguments, compute the expected times 'L(i)' spent in each
+state i during the time interval [0,t], assuming that the initial
+occupancy vector is P.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ctmcisir.html">ctmcisir</a>
+                   </code></b>
+                 </td>
+                 <td>Check if Q is irreducible, and identify Strongly Connected Components
+(SCC) in the transition graph of the DTMC with infinitesimal generator
+matrix Q.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ctmctaexps.html">ctmctaexps</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the _time-averaged sojourn time_ 'M(i)', defined as the fraction
+of the time interval [0,t] (or until absorption) spent in state i,
+assuming that the state occupancy probabilities at time 0 are P.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ctmcmtta.html">ctmcmtta</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the Mean-Time to Absorption (MTTA) of the CTMC described by the
+infinitesimal generator matrix Q, starting from initial occupancy
+probabilities P.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ctmcfpt.html">ctmcfpt</a>
+                   </code></b>
+                 </td>
+                 <td>Compute mean first passage times for an irreducible continuous-time
+Markov chain.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Single Station Queueing Systems">Single Station Queueing Systems</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qsmm1.html">qsmm1</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average number of requests and
+throughput for a M/M/1 queue.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qsmmm.html">qsmmm</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average number of requests in
+service and throughput for a M/M/m queue, a queueing system with m
+identical servers connected to a single FCFS queue.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="erlangb.html">erlangb</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the steady-state blocking probability in the Erlang loss model.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="erlangc.html">erlangc</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the steady-state probability of delay in the Erlang delay model.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="engset.html">engset</a>
+                   </code></b>
+                 </td>
+                 <td>Evaluate the Engset loss formula.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qsmminf.html">qsmminf</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average number of requests and
+throughput for an infinite-server queue.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qsmm1k.html">qsmm1k</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average number of requests and
+throughput for a M/M/1/K finite capacity system.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qsmmmk.html">qsmmmk</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average number of requests and
+throughput for a M/M/m/K finite capacity system.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qsammm.html">qsammm</a>
+                   </code></b>
+                 </td>
+                 <td>Compute _approximate_ utilization, response time, average number of
+requests in service and throughput for an asymmetric M/M/m queue.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qsmg1.html">qsmg1</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average number of requests and
+throughput for a M/G/1 system.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qsmh1.html">qsmh1</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average number of requests and
+throughput for a M/H_m/1 system.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Queueing Networks">Queueing Networks</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnclosed.html">qnclosed</a>
+                   </code></b>
+                 </td>
+                 <td>This function computes steady-state performance measures of closed
+queueing networks using the Mean Value Analysis (MVA) algorithm.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncmmvabs.html">qncmmvabs</a>
+                   </code></b>
+                 </td>
+                 <td>Approximate Mean Value Analysis (MVA) for closed, multiclass queueing
+networks with K service centers and C customer classes.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncmmva.html">qncmmva</a>
+                   </code></b>
+                 </td>
+                 <td>Compute steady-state performance measures for closed, multiclass
+queueing networks using the Mean Value Analysys (MVA) algorithm.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncmnpop.html">qncmnpop</a>
+                   </code></b>
+                 </td>
+                 <td>Given a network with C customer classes, this function computes the
+number of k-mixes 'H(r,k)' that can be constructed by the multiclass MVA
+algorithm by allocating k customers to the first r classes.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncmpopmix.html">qncmpopmix</a>
+                   </code></b>
+                 </td>
+                 <td>Return the set of population mixes for a closed multiclass queueing
+network with exactly K customers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncmvisits.html">qncmvisits</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the average number of visits for the nodes of a closed
+multiclass network with K service centers and C customer classes.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncscmva.html">qncscmva</a>
+                   </code></b>
+                 </td>
+                 <td>Conditional MVA (CMVA) algorithm, a numerically stable variant of MVA.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsconvld.html">qncsconvld</a>
+                   </code></b>
+                 </td>
+                 <td>Convolution algorithm for product-form, single-class closed queueing
+networks with K general load-dependent service centers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsconv.html">qncsconv</a>
+                   </code></b>
+                 </td>
+                 <td>Analyze product-form, single class closed networks with K service
+centers using the convolution algorithm.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsmvaap.html">qncsmvaap</a>
+                   </code></b>
+                 </td>
+                 <td>Analyze closed, single class queueing networks using the Approximate
+Mean Value Analysis (MVA) algorithm.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsmvablo.html">qncsmvablo</a>
+                   </code></b>
+                 </td>
+                 <td>Approximate MVA algorithm for closed queueing networks with blocking.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsmvald.html">qncsmvald</a>
+                   </code></b>
+                 </td>
+                 <td>Mean Value Analysis algorithm for closed, single class queueing networks
+with K service centers and load-dependent service times.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsmva.html">qncsmva</a>
+                   </code></b>
+                 </td>
+                 <td>Analyze closed, single class queueing networks using the exact Mean
+Value Analysis (MVA) algorithm.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsvisits.html">qncsvisits</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the mean number of visits to the service centers of a single
+class, closed network with K service centers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnmarkov.html">qnmarkov</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average queue length and throughput
+for open or closed queueing networks with finite capacity and a single
+class of requests.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnmix.html">qnmix</a>
+                   </code></b>
+                 </td>
+                 <td>Mean Value Analysis for mixed queueing networks.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnmknode.html">qnmknode</a>
+                   </code></b>
+                 </td>
+                 <td>Creates a node; this function can be used together with 'qnsolve'.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnom.html">qnom</a>
+                   </code></b>
+                 </td>
+                 <td>Exact analysis of open, multiple-class BCMP networks.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnomvisits.html">qnomvisits</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the visit ratios to the service centers of an open multiclass
+network with K service centers and C customer classes.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnopen.html">qnopen</a>
+                   </code></b>
+                 </td>
+                 <td>Compute utilization, response time, average number of requests in the
+system, and throughput for open queueing networks.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnos.html">qnos</a>
+                   </code></b>
+                 </td>
+                 <td>Analyze open, single class BCMP queueing networks with K service
+centers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnosvisits.html">qnosvisits</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the average number of visits to the service centers of a single
+class open Queueing Network with K service centers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnsolve.html">qnsolve</a>
+                   </code></b>
+                 </td>
+                 <td>High-level function for analyzing QN models.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Bounds Analysis">Bounds Analysis</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnosaba.html">qnosaba</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Asymptotic Bounds for open, single-class networks with K service
+centers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsaba.html">qncsaba</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Asymptotic Bounds for the system throughput and response time of
+closed, single-class networks with K service centers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnomaba.html">qnomaba</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Asymptotic Bounds for open, multiclass networks with K service
+centers and C customer classes.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncmaba.html">qncmaba</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Asymptotic Bounds for closed, multiclass networks with K service
+centers and C customer classes.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qnosbsb.html">qnosbsb</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Balanced System Bounds for single-class, open networks with K
+service centers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsbsb.html">qncsbsb</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Balanced System Bounds on system throughput and response time
+for closed, single-class networks with K service centers.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncmbsb.html">qncmbsb</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Balanced System Bounds for closed, multiclass networks with K
+service centers and C customer classes.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncmcb.html">qncmcb</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Composite Bounds (CB) on system throughput and response time for
+closed multiclass networks.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncspb.html">qncspb</a>
+                   </code></b>
+                 </td>
+                 <td>Compute PB Bounds (C.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qncsgb.html">qncsgb</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Geometric Bounds (GB) on system throughput, system response time
+and server queue lenghts for closed, single-class networks with K
+service centers and N requests.</td>
+               </tr>
+             </tbody>
+           </table>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qncmcb</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Bounds Analysis">
+                    <i class="fas fa-list-alt"></i>
+                    Bounds Analysis
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qncmcb</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>Xl</var>, <var>Xu</var>, <var>Rl</var>, <var>Ru</var>] = <b>qncmcb</b><i> (<var>N</var>, <var>D</var>)</i></dt>
+<dt><u>Function File:</u> [<var>Xl</var>, <var>Xu</var>, <var>Rl</var>, <var>Ru</var>] = <b>qncmcb</b><i> (<var>N</var>, <var>S</var>, <var>V</var>)</i></dt>
+</dl>
+
+ <a name="index-multiclass-network_002c-closed"></a>
+ <a name="index-closed-multiclass-network"></a>
+ <a name="index-bounds_002c-composite"></a>
+ <a name="index-composite-bounds"></a>
+
+<p> Compute Composite Bounds (CB) on system throughput and response time for closed multiclass networks.
+</p>
+<div class="ms-5">
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>N</var>(c)</code></dt>
+</dl>
+<p> number of class <math>c</math> requests in the system.
+</p>
+ </dd>
+<dt> <code><var>D</var>(c, k)</code></dt>
+</dl>
+<p> class <math>c</math> service demand
+ at center <math>k</math> (<code><var>S</var>(c,k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>S</var>(c, k)</code></dt>
+</dl>
+<p> mean service time of class <math>c</math>
+ requests at center <math>k</math> (<code><var>S</var>(c,k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>V</var>(c,k)</code></dt>
+</dl>
+<p> average number of visits of class <math>c</math>
+ requests to center <math>k</math> (<code><var>V</var>(c,k) &ge; 0</code>).
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>Xl</var>(c)</code></dt>
+<dt> <code><var>Xu</var>(c)</code></dt>
+</dl>
+<p> Lower and upper bounds on class <math>c</math> throughput.
+</p>
+ </dd>
+<dt> <code><var>Rl</var>(c)</code></dt>
+<dt> <code><var>Ru</var>(c)</code></dt>
+</dl>
+<p> Lower and upper bounds on class <math>c</math> response time.
+</p>
+</dd>
+</dl>
+
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ Teemu Kerola, <cite>The Composite Bound Method (CBM) for Computing
+ Throughput Bounds in Multiple Class Environments</cite>, Performance
+ Evaluation Vol. 6, Issue 1, March 1986, DOI
+ <a href="http://dx.doi.org/10.1016/0166-5316(86)90002-7">10.1016/0166-5316(86)90002-7</a>. Also available as
+ <a href="http://docs.lib.purdue.edu/cstech/395/">Technical Report CSD-TR-475</a>, Department of Computer Sciences, Purdue University, mar
+ 13, 1984 (Revised Aug 27, 1984).
+ </li></ul>
+
+
+</div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ S = [10 7 5 4; ...
+      5  2 4 6];
+ NN=20;
+ Xl = Xu = Rl = Ru = Xmva = Rmva = zeros(NN,2);
+ for n=1:NN
+   N=[n,10];
+   [a b c d] = qncmcb(N,S);
+   Xl(n,:) = a; Xu(n,:) = b; Rl(n,:) = c; Ru(n,:) = d;
+   [U R Q X] = qncmmva(N,S,ones(size(S)));
+   Xmva(n,:) = X(:,1)'; Rmva(n,:) = sum(R,2)';
+ endfor
+ subplot(2,2,1);
+ plot(1:NN,Xl(:,1), 1:NN,Xu(:,1), 1:NN,Xmva(:,1), ";MVA;", "linewidth", 2);
+ ylim([0, 0.2]);
+ title("Class 1 throughput"); legend("boxoff");
+ subplot(2,2,2);
+ plot(1:NN,Xl(:,2), 1:NN,Xu(:,2), 1:NN,Xmva(:,2), ";MVA;", "linewidth", 2);
+ ylim([0, 0.2]);
+ title("Class 2 throughput"); legend("boxoff");
+ subplot(2,2,3);
+ plot(1:NN,Rl(:,1), 1:NN,Ru(:,1), 1:NN,Rmva(:,1), ";MVA;", "linewidth", 2);
+ ylim([0, 700]);
+ title("Class 1 response time"); legend("location", "northwest"); legend("boxoff");
+ subplot(2,2,4);
+ plot(1:NN,Rl(:,2), 1:NN,Ru(:,2), 1:NN,Rmva(:,2), ";MVA;", "linewidth", 2);
+ ylim([0, 700]);
+ title("Class 2 response time"); legend("location", "northwest"); legend("boxoff");
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/qncmcb_101.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

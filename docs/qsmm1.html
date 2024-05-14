@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qsmm1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Single Station Queueing Systems">
+                    <i class="fas fa-list-alt"></i>
+                    Single Station Queueing Systems
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qsmm1</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>, <var>p0</var>] = <b>qsmm1</b><i> (<var>lambda</var>, <var>mu</var>)</i></dt>
+<dt><u>Function File:</u> <var>pk</var> = <b>qsmm1</b><i> (<var>lambda</var>, <var>mu</var>, <var>k</var>)</i></dt>
+</dl>
+
+ <a name="index-M_002fM_002f1-system"></a>
+
+<p> Compute utilization, response time, average number of requests and throughput for a <math>M/M/1</math> queue.
+</p>
+<div class="ms-5">
+<p> $$
+ \pi_k = (1-\rho)\rho^k
+ $$
+</p>
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>lambda</var></code></dt>
+</dl>
+<p> Arrival rate (<code><var>lambda</var> &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>mu</var></code></dt>
+</dl>
+<p> Service rate (<code><var>mu</var> &gt; <var>lambda</var></code>).
+</p>
+ </dd>
+<dt> <code><var>k</var></code></dt>
+</dl>
+<p> Number of requests in the system (<code><var>k</var> &ge; 0</code>).
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var></code></dt>
+</dl>
+<p> Server utilization
+</p>
+ </dd>
+<dt> <code><var>R</var></code></dt>
+</dl>
+<p> Server response time
+</p>
+ </dd>
+<dt> <code><var>Q</var></code></dt>
+</dl>
+<p> Average number of requests in the system
+</p>
+ </dd>
+<dt> <code><var>X</var></code></dt>
+</dl>
+<p> Server throughput. If the system is ergodic (<code><var>mu</var> &gt;
+ <var>lambda</var></code>), we always have <code><var>X</var> = <var>lambda</var></code>
+</p>
+ </dd>
+<dt> <code><var>p0</var></code></dt>
+</dl>
+<p> Steady-state probability that there are no requests in the system.
+</p>
+ </dd>
+<dt> <code><var>pk</var></code></dt>
+</dl>
+<p> Steady-state probability that there are <var>k</var> requests in the system.
+ (including the one being served).
+</p>
+</dd>
+</dl>
+
+<p> If this function is called with less than three input parameters,
+ <var>lambda</var> and <var>mu</var> can be vectors of the same size. In this
+ case, the results will be vectors as well.
+</p>
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ G. Bolch, S. Greiner, H. de Meer and K. Trivedi, <cite>Queueing Networks
+ and Markov Chains: Modeling and Performance Evaluation with Computer
+ Science Applications</cite>, Wiley, 1998, Section 6.3
+ </li></ul>
+
+<p> <strong>See also: </strong>
+  <a href="qsmmm.html">qsmmm</a>, 
+  <a href="qsmminf.html">qsmminf</a>, 
+  <a href="qsmmmk.html">qsmmmk</a>
+</p>
+</div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ ## Given a M/M/1 queue, compute the steady-state probability pk
+ ## of having k requests in the systen.
+ lambda = 0.2;
+ mu = 0.25;
+ k = 0:10;
+ pk = qsmm1(lambda, mu, k);
+ plot(k, pk, "-o", "linewidth", 2);
+ xlabel("N. of requests (k)");
+ ylabel("p_k");
+ title(sprintf("M/M/1 system, \\lambda = %g, \\mu = %g", lambda, mu));
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/qsmm1_101.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

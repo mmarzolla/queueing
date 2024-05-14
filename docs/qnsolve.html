@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qnsolve</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qnsolve</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnsolve</b><i> (<var>&quot;closed&quot;</var>, <var>N</var>, <var>QQ</var>, <var>V</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnsolve</b><i> (<var>&quot;closed&quot;</var>, <var>N</var>, <var>QQ</var>, <var>V</var>, <var>Z</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnsolve</b><i> (<var>&quot;open&quot;</var>, <var>lambda</var>, <var>QQ</var>, <var>V</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnsolve</b><i> (<var>&quot;mixed&quot;</var>, <var>lambda</var>, <var>N</var>, <var>QQ</var>, <var>V</var>)</i></dt>
+</dl>
+
+<p> High-level function for analyzing QN models.
+</p>
+<div class="ms-5">
+ <ul>
+<li> For <strong>closed</strong> networks, the following server types are
+ supported: <math>M/M/m</math>&ndash;FCFS, <math>-/G/\infty</math>, <math>-/G/1</math>&ndash;LCFS-PR,
+ <math>-/G/1</math>&ndash;PS and load-dependent variants.
+
+ </li><li> For <strong>open</strong> networks, the following server types are supported:
+ <math>M/M/m</math>&ndash;FCFS, <math>-/G/\infty</math> and <math>-/G/1</math>&ndash;PS. General
+ load-dependent nodes are <math>not</math> supported. Multiclass open networks
+ do not support multiple server <math>M/M/m</math> nodes, but only
+ single server <math>M/M/1</math>&ndash;FCFS.
+
+ </li><li> For <strong>mixed</strong> networks, the following server types are supported:
+ <math>M/M/1</math>&ndash;FCFS, <math>-/G/\infty</math> and <math>-/G/1</math>&ndash;PS. General
+ load-dependent nodes are <math>not</math> supported.
+
+</li></ul>
+
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>N</var></code></dt>
+<dt> <code><var>N</var>(c)</code></dt>
+</dl>
+<p> Number of requests in the system for closed networks. For
+ single-class networks, <var>N</var> must be a scalar. For multiclass
+ networks, <code><var>N</var>(c)</code> is the population size of closed class
+ <math>c</math>.
+</p>
+ </dd>
+<dt> <code><var>lambda</var></code></dt>
+<dt> <code><var>lambda</var>(c)</code></dt>
+</dl>
+<p> External arrival rate (scalar) for open networks. For single-class
+ networks, <var>lambda</var> must be a scalar. For multiclass networks,
+ <code><var>lambda</var>(c)</code> is the class <math>c</math> overall arrival rate.
+</p>
+ </dd>
+<dt> <code><var>QQ</var>{i}</code></dt>
+</dl>
+<p> List of queues in the network. This must be a cell array
+ with <math>N</math> elements, such that <code><var>QQ</var>{i}</code> is
+ a struct produced by the <code>qnmknode</code> function.
+</p>
+ </dd>
+<dt> <code><var>Z</var></code></dt>
+</dl>
+<p> External delay (&quot;think time&quot;) for closed networks. Default 0.
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var>(k)</code></dt>
+</dl>
+<p> If <math>k</math> is a FCFS node, then <code><var>U</var>(k)</code> is the utilization
+ of service center <math>k</math>. If <math>k</math> is an IS node, then
+ <code><var>U</var>(k)</code> is the <math>traffic intensity</math> defined as
+ <code><var>X</var>(k)*<var>S</var>(k)</code>.
+</p>
+ </dd>
+<dt> <code><var>R</var>(k)</code></dt>
+</dl>
+<p> average response time of service center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>Q</var>(k)</code></dt>
+</dl>
+<p> average number of customers in service center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>X</var>(k)</code></dt>
+</dl>
+<p> throughput of service center <math>k</math>.
+</p>
+</dd>
+</dl>
+
+<p> Note that for multiclass networks, the computed results are per-class
+ utilization, response time, number of customers and throughput:
+ <code><var>U</var>(c,k)</code>, <code><var>R</var>(c,k)</code>, <code><var>Q</var>(c,k)</code>,
+ <code><var>X</var>(c,k)</code>.
+</p>
+<p> String literals are case-insensitive, so <var>&quot;closed&quot;</var>, <var>&quot;Closed&quot;</var>
+ and <var>&quot;CLoSEd&quot;</var> are all equivalent.
+</p>
+
+</div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ QQ = { qnmknode( "m/m/m-fcfs", [0.2 0.1 0.1; 0.2 0.1 0.1] ), ...
+        qnmknode( "-/g/1-ps", [0.4; 0.6] ), ...
+        qnmknode( "-/g/inf", [1; 2] ) };
+ V = [ 1 0.6 0.4; ...
+       1 0.3 0.7 ];
+ N = [ 2 1 ];
+ [U R Q X] = qnsolve( "closed", N, QQ, V );
+
+                    </pre></td></tr></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

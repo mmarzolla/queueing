@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qnmix</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qnmix</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>] = <b>qnmix</b><i> (<var>lambda</var>, <var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>)</i></dt>
+</dl>
+
+ <a name="index-Mean-Value-Analysys-_0028MVA_0029"></a>
+ <a name="index-mixed-network"></a>
+
+<p> Mean Value Analysis for mixed queueing networks. The network
+ consists of <math>K</math> service centers (single-server or delay
+ centers) and <math>C</math> independent customer chains. Both open and
+ closed chains are possible. <var>lambda</var> is the vector of per-chain
+ arrival rates (open classes); <var>N</var> is the vector of populations
+ for closed chains.
+</p>
+<div class="ms-5">
+<p> Class switching is <strong>not</strong> allowed. Each customer class
+ <math>must</math> correspond to an independent chain.
+</p>
+<p> If the network is made of open or closed classes only, then this
+ function calls <code>qnom</code> or <code>qncmmva</code> respectively, and
+ prints a warning message.
+</p>
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>lambda</var>(c)</code></dt>
+<dt> <code><var>N</var>(c)</code></dt>
+</dl>
+<p> For each customer chain <math>c</math>:
+</p>
+ <ul>
+<li> if <math>c</math> is a closed chain, then <code><var>N</var>(c)&gt;0</code> is the
+ number of class <math>c</math> requests and <code><var>lambda</var>(c)</code> must be
+ zero;
+
+ </li><li> If <math>c</math> is an open chain,
+ <code><var>lambda</var>(c)&gt;0</code> is the arrival rate of class <math>c</math>
+ requests and <code><var>N</var>(c)</code> must be zero;
+
+</li></ul>
+
+ <p>In other words, for each class <math>c</math> the following must hold:
+</p>
+ <table><tr><td>&nbsp;</td><td><pre class="example"> (<var>lambda</var>(c)&gt;0 &amp;&amp; <var>N</var>(c)==0) || (<var>lambda</var>(c)==0 &amp;&amp; <var>N</var>(c)&gt;0)
+ </pre></td></tr></table>
+
+ </dd>
+<dt> <code><var>S</var>(c,k)</code></dt>
+</dl>
+<p> mean class <math>c</math> service time at center <math>k</math>,
+ <code><var>S</var>(c,k) &ge; 0</code>. For FCFS nodes, service times must be
+ class-independent.
+</p>
+ </dd>
+<dt> <code><var>V</var>(c,k)</code></dt>
+</dl>
+<p> average number of visits of class <math>c</math> customers to center
+ <math>k</math> (<code><var>V</var>(c,k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>m</var>(k)</code></dt>
+</dl>
+<p> number of servers at center <math>k</math>. Only single-server
+ (<code><var>m</var>(k)==1</code>) or IS (Infinite Server) nodes
+ (<code><var>m</var>(k)&lt;1</code>) are supported. If omitted, each center is
+ assumed to be of type <math>M/M/1</math>-FCFS. Queueing discipline for
+ single-server nodes can be FCFS, PS or LCFS-PR.
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var>(c,k)</code></dt>
+</dl>
+<p> class <math>c</math> utilization at center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>R</var>(c,k)</code></dt>
+</dl>
+<p> class <math>c</math> response time at center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>Q</var>(c,k)</code></dt>
+</dl>
+<p> average number of class <math>c</math> requests at center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>X</var>(c,k)</code></dt>
+</dl>
+<p> class <math>c</math> throughput at center <math>k</math>.
+</p>
+</dd>
+</dl>
+
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ Edward D. Lazowska, John Zahorjan, G. Scott Graham, and Kenneth C.
+ Sevcik, <cite>Quantitative System Performance: Computer System
+ Analysis Using Queueing Network Models</cite>, Prentice Hall,
+ 1984. <a href="http://www.cs.washington.edu/homes/lazowska/qsp/">http://www.cs.washington.edu/homes/lazowska/qsp/</a>. In
+ particular, see section 7.4.3 (&quot;Mixed Model Solution Techniques&quot;).
+ Note that in this function we compute the mean response time <math>R</math>
+ instead of the mean residence time as in the reference.
+
+ </li><li>
+ Herb Schwetman, <cite>Implementing the Mean Value Algorithm for the
+ Solution of Queueing Network Models</cite>, Technical Report
+ <a href="http://docs.lib.purdue.edu/cstech/286/">CSD-TR-355</a>, Department
+ of Computer Sciences, Purdue University, revised Feb 15, 1982.
+ </li></ul>
+
+<p> <strong>See also: </strong>
+  <a href="qncmmva.html">qncmmva</a>, 
+qncm
+</p>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

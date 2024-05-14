@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qncmvisits</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qncmvisits</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>V</var> <var>ch</var>] = <b>qncmvisits</b><i> (<var>P</var>)</i></dt>
+<dt><u>Function File:</u> [<var>V</var> <var>ch</var>] = <b>qncmvisits</b><i> (<var>P</var>, <var>r</var>)</i></dt>
+</dl>
+
+<p> Compute the average number of visits for the nodes of a closed multiclass network with <math>K</math> service centers and <math>C</math> customer classes.
+</p>
+<div class="ms-5">
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>P</var>(r,i,s,j)</code></dt>
+</dl>
+<p> probability that a
+ class <math>r</math> request which completed service at center <math>i</math> is
+ routed to center <math>j</math> as a class <math>s</math> request. Class switching
+ is allowed.
+</p>
+ </dd>
+<dt> <code><var>r</var>(c)</code></dt>
+</dl>
+<p> index of class <math>c</math> reference station,
+ <math>r(c) \in 1, &hellip;, K</math>, <math>1 &le; c &le; C</math>.
+ The class <math>c</math> visit count to server <code><var>r</var>(c)</code>
+ (<code><var>V</var>(c,r(c))</code>) is conventionally set to 1. The reference
+ station serves two purposes: (i) its throughput is assumed to be the
+ system throughput, and (ii) a job returning to the reference station
+ is assumed to have completed one cycle. Default is to consider
+ station 1 as the reference station for all classes.
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>V</var>(c,i)</code></dt>
+</dl>
+<p> number of visits of class <math>c</math> requests at center <math>i</math>.
+</p>
+ </dd>
+<dt> <code><var>ch</var>(c)</code></dt>
+</dl>
+<p> chain number that class <math>c</math> belongs
+ to. Different classes can belong to the same chain. Chains are
+ numbered sequentially starting from 1 (<math>1, 2, &hellip;</math>). The
+ total number of chains is <code>max(<var>ch</var>)</code>.
+</p>
+</dd>
+</dl>
+
+
+</div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: ctmcexps</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Continuous-time Markov chains">
+                    <i class="fas fa-list-alt"></i>
+                    Continuous-time Markov chains
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>ctmcexps</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> <var>L</var> = <b>ctmcexps</b><i> (<var>Q</var>, <var>t</var>, <var>p</var> )</i></dt>
+<dt><u>Function File:</u> <var>L</var> = <b>ctmcexps</b><i> (<var>Q</var>, <var>p</var>)</i></dt>
+</dl>
+
+ <a name="index-Markov-chain_002c-continuous-time"></a>
+ <a name="index-continuous-time-Markov-chain"></a>
+ <a name="index-expected-sojourn-time_002c-CTMC"></a>
+ <a name="index-CTMC"></a>
+
+<p> With three arguments, compute the expected times <code><var>L</var>(i)</code>
+ spent in each state <math>i</math> during the time interval <math>[0,t]</math>,
+ assuming that the initial occupancy vector is <var>p</var>. With two
+ arguments, compute the expected time <code><var>L</var>(i)</code> spent in each
+ transient state <math>i</math> until absorption.
+</p>
+<div class="ms-5">
+<p> <strong>Note:</strong> In its current implementation, this function
+ requires that an absorbing state is reachable from any
+ non-absorbing state of <math>Q</math>.
+</p>
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>Q</var>(i,j)</code></dt>
+</dl>
+<p> <math>N \times N</math> infinitesimal generator matrix. <code><var>Q</var>(i,j)</code>
+ is the transition rate from state <math>i</math> to state <math>j</math>,
+ <math>1 &le; i, j &le; N</math>, <math>i \neq j</math>.
+ The matrix <var>Q</var> must also satisfy the
+ condition <math>\sum_j=1^N Q_i,j = 0</math> for every <math>i=1, &hellip;, N</math>.
+</p>
+ </dd>
+<dt> <code><var>t</var></code></dt>
+</dl>
+<p> If given, compute the expected sojourn times in <math>[0,t]</math>
+</p>
+ </dd>
+<dt> <code><var>p</var>(i)</code></dt>
+</dl>
+<p> Initial occupancy probability vector; <code><var>p</var>(i)</code> is the
+ probability the system is in state <math>i</math> at time 0, <math>i = 1,
+ &hellip;, N</math>
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>L</var>(i)</code></dt>
+</dl>
+<p> If this function is called with three arguments, <code><var>L</var>(i)</code> is
+ the expected time spent in state <math>i</math> during the interval
+ <math>[0,t]</math>. If this function is called with two arguments
+ <code><var>L</var>(i)</code> is the expected time spent in transient state
+ <math>i</math> until absorption; if state <math>i</math> is absorbing,
+ <code><var>L</var>(i)</code> is zero.
+</p>
+</dd>
+</dl>
+
+<p> <strong>See also: </strong>
+  <a href="dtmcexps.html">dtmcexps</a>
+</p>
+</div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ lambda = 0.5;
+ N = 4;
+ b = lambda*[1:N-1];
+ d = zeros(size(b));
+ Q = ctmcbd(b,d);
+ t = linspace(0,10,100);
+ p0 = zeros(1,N); p0(1)=1;
+ L = zeros(length(t),N);
+ for i=1:length(t)
+   L(i,:) = ctmcexps(Q,t(i),p0);
+ endfor
+ plot( t, L(:,1), ";State 1;", "linewidth", 2, ...
+       t, L(:,2), ";State 2;", "linewidth", 2, ...
+       t, L(:,3), ";State 3;", "linewidth", 2, ...
+       t, L(:,4), ";State 4;", "linewidth", 2 );
+ legend("location","northwest"); legend("boxoff");
+ xlabel("Time");
+ ylabel("Expected sojourn time");
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/ctmcexps_101.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 2
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ lambda = 0.5;
+ N = 4;
+ b = lambda*[1:N-1];
+ d = zeros(size(b));
+ Q = ctmcbd(b,d);
+ p0 = zeros(1,N); p0(1)=1;
+ L = ctmcexps(Q,p0);
+ disp(L);
+
+   2.0000   1.0000   0.6667        0
+                    </pre></td></tr></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

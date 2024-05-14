@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qnomaba</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Bounds Analysis">
+                    <i class="fas fa-list-alt"></i>
+                    Bounds Analysis
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qnomaba</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>Xl</var>, <var>Xu</var>, <var>Rl</var>, <var>Ru</var>] = <b>qnomaba</b><i> (<var>lambda</var>, <var>D</var>)</i></dt>
+<dt><u>Function File:</u> [<var>Xl</var>, <var>Xu</var>, <var>Rl</var>, <var>Rl</var>] = <b>qnomaba</b><i> (<var>lambda</var>, <var>S</var>, <var>V</var>)</i></dt>
+</dl>
+
+ <a name="index-bounds_002c-asymptotic"></a>
+ <a name="index-open-network"></a>
+ <a name="index-multiclass-network_002c-open"></a>
+
+<p> Compute Asymptotic Bounds for open, multiclass networks with <math>K</math>
+ service centers and <math>C</math> customer classes.
+</p>
+<div class="ms-5">
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>lambda</var>(c)</code></dt>
+</dl>
+<p> class <math>c</math> arrival rate to the system (vector of length
+ <math>C</math>, <code><var>lambda</var>(c) &gt; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>D</var>(c, k)</code></dt>
+</dl>
+<p> class <math>c</math> service demand at center <math>k</math> (<math>C \times K</math>
+ matrix, <code><var>D</var>(c, k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>S</var>(c, k)</code></dt>
+</dl>
+<p> mean service time of class <math>c</math> requests at center <math>k</math>
+ (<math>C \times K</math> matrix, <code><var>S</var>(c, k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>V</var>(c, k)</code></dt>
+</dl>
+<p> mean number of visits of class <math>c</math> requests at center <math>k</math>
+ (<math>C \times K</math> matrix, <code><var>V</var>(c, k) &ge; 0</code>).
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>Xl</var>(c)</code></dt>
+<dt> <code><var>Xu</var>(c)</code></dt>
+</dl>
+<p> lower and upper bounds of class <math>c</math> throughput.
+ <code><var>Xl</var>(c)</code> is always <math>0</math> since there can be no lower
+ bound on the throughput of open networks (vector of length
+ <math>C</math>).
+</p>
+ </dd>
+<dt> <code><var>Rl</var>(c)</code></dt>
+<dt> <code><var>Ru</var>(c)</code></dt>
+</dl>
+<p> lower and upper bounds of class <math>c</math> response time.
+ <code><var>Ru</var>(c)</code> is always <code>+inf</code> since there can be no
+ upper bound on the response time of open networks (vector of length
+ <math>C</math>).
+</p>
+</dd>
+</dl>
+
+
+</div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qncspb</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Bounds Analysis">
+                    <i class="fas fa-list-alt"></i>
+                    Bounds Analysis
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qncspb</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>Xl</var>, <var>Xu</var>, <var>Rl</var>, <var>Ru</var>] = <b>qncspb</b><i> (<var>N</var>, <var>D</var> )</i></dt>
+<dt><u>Function File:</u> [<var>Xl</var>, <var>Xu</var>, <var>Rl</var>, <var>Ru</var>] = <b>qncspb</b><i> (<var>N</var>, <var>S</var>, <var>V</var> )</i></dt>
+<dt><u>Function File:</u> [<var>Xl</var>, <var>Xu</var>, <var>Rl</var>, <var>Ru</var>] = <b>qncspb</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var> )</i></dt>
+<dt><u>Function File:</u> [<var>Xl</var>, <var>Xu</var>, <var>Rl</var>, <var>Ru</var>] = <b>qncspb</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>, <var>Z</var> )</i></dt>
+</dl>
+
+ <a name="index-bounds_002c-PB"></a>
+ <a name="index-PB-bounds"></a>
+ <a name="index-closed-network_002c-single-class"></a>
+
+<p> Compute PB Bounds (C. H. Hsieh and S. Lam, 1987) for single-class,
+ closed networks with <math>K</math> service centers.
+</p>
+<div class="ms-5">
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var></var></code></dt>
+</dl>
+<p> number of requests in the system (scalar, <code><var>N</var> &gt; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>D</var>(k)</code></dt>
+</dl>
+<p> service demand of service center <math>k</math> (<code><var>D</var>(k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>S</var>(k)</code></dt>
+</dl>
+<p> mean service time at center <math>k</math> (<code><var>S</var>(k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>V</var>(k)</code></dt>
+</dl>
+<p> visit ratio to center <math>k</math> (<code><var>V</var>(k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>m</var>(k)</code></dt>
+</dl>
+<p> number of servers at center <math>k</math>. This function only supports
+ <math>M/M/1</math> queues, therefore <var>m</var> must be
+ <code>ones(size(S))</code>.
+</p>
+ </dd>
+<dt> <code><var>Z</var></code></dt>
+</dl>
+<p> external delay (think time, <code><var>Z</var> &ge; 0</code>). Default 0.
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>Xl</var></code></dt>
+<dt> <code><var>Xu</var></code></dt>
+</dl>
+<p> Lower and upper bounds on the system throughput.
+</p>
+ </dd>
+<dt> <code><var>Rl</var></code></dt>
+<dt> <code><var>Ru</var></code></dt>
+</dl>
+<p> Lower and upper bounds on the system response time.
+</p>
+</dd>
+</dl>
+
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ C. H. Hsieh and S. Lam, <cite>Two classes of performance bounds for
+ closed queueing networks</cite>, Performance Evaluation, Vol. 7 Issue 1,
+ pp. 3&ndash;30, February 1987, DOI
+ <a href="http://dx.doi.org/10.1016/0166-5316(87)90054-X">10.1016/0166-5316(87)90054-X</a>. Also available as
+ <a href="ftp://ftp.cs.utexas.edu/pub/techreports/tr85-09.pdf">Technical Report TR-85-09</a>, Department of Computer Science, University of Texas
+ at Austin, June 1985
+ </li></ul>
+
+<p> This function implements the non-iterative variant described in G.
+ Casale, R. R. Muntz, G. Serazzi, <cite>Geometric Bounds: a
+ Non-Iterative Analysis Technique for Closed Queueing Networks</cite>, IEEE
+ Transactions on Computers, 57(6):780-794, June 2008.
+</p>
+<p> <strong>See also: </strong>
+  <a href="qncsaba.html">qncsaba</a>, 
+qbcsbsb, 
+  <a href="qncsgb.html">qncsgb</a>
+</p>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

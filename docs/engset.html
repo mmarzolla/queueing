@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: engset</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Single Station Queueing Systems">
+                    <i class="fas fa-list-alt"></i>
+                    Single Station Queueing Systems
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>engset</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> <var>B</var> = <b>engset</b><i> (<var>A</var>, <var>m</var>, <var>n</var>)</i></dt>
+</dl>
+
+ <a name="index-Engset-loss-formula"></a>
+
+<p> Evaluate the Engset loss formula.
+</p>
+<div class="ms-5">
+<p> The Engset formula computes the blocking probability
+ <math>P_b(A,m,n)</math> for a system with a finite population of <math>n</math>
+ users, <math>m</math> identical servers, no queue, individual service
+ rate <math>\mu</math>, individual arrival rate <math>\lambda</math> (i.e., the
+ time until a user tries to request service is exponentially
+ distributed with mean <math>1/\lambda</math>), and offered load
+ <math>A=\lambda/\mu</math>.
+</p>
+<p> $$
+ P_b(A, m, n) = {{\displaystyle{A^m {n \choose m}}} \over {\displaystyle{\sum_{k=0}^m A^k {n \choose k}}}}
+ $$
+</p>
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>A</var></code></dt>
+</dl>
+<p> Offered load, defined as <math>A = \lambda / \mu</math> where
+ <math>\lambda</math> is the mean arrival rate and <math>\mu</math> the mean
+ service rate of each individual server (real, <math>A &gt; 0</math>).
+</p>
+ </dd>
+<dt> <code><var>m</var></code></dt>
+</dl>
+<p> Number of identical servers (integer, <math>m &ge; 1</math>). Default <math>m = 1</math>
+</p>
+ </dd>
+<dt> <code><var>n</var></code></dt>
+</dl>
+<p> Number of requests (integer, <math>n &ge; 1</math>). Default <math>n = 1</math>
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>B</var></code></dt>
+</dl>
+<p> The value <math>P_b(A, m, n)</math>
+</p>
+</dd>
+</dl>
+
+<p> <var>A</var>, <var>m</var> or <math>n</math> can be vectors, and in this case, the
+ results will be vectors as well.
+</p>
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ G. Zeng, <cite>Two common properties of the Erlang-B function, Erlang-C function, and Engset blocking function</cite>, Mathematical and Computer Modelling, Volume 37, Issues 12-13, June 2003, Pages 1287-1296
+ </li></ul>
+
+<p> <strong>See also: </strong>
+  <a href="erlangb.html">erlangb</a>, 
+  <a href="erlangc.html">erlangc</a>
+</p>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

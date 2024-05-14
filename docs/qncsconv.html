@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qncsconv</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qncsconv</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>, <var>G</var>] = <b>qncsconv</b><i> (<var>N</var>, <var>S</var>, <var>V</var>)</i></dt>
+<dt><u>Function File:</u> [<var>U</var>, <var>R</var>, <var>Q</var>, <var>X</var>, <var>G</var>] = <b>qncsconv</b><i> (<var>N</var>, <var>S</var>, <var>V</var>, <var>m</var>)</i></dt>
+</dl>
+
+ <a name="index-closed-network_002c-single-class"></a>
+ <a name="index-normalization-constant"></a>
+ <a name="index-convolution-algorithm"></a>
+
+<p> Analyze product-form, single class closed networks with <math>K</math> service centers using the convolution algorithm.
+</p>
+<div class="ms-5">
+<p> Load-independent service centers, multiple servers (<math>M/M/m</math>
+ queues) and IS nodes are supported. For general load-dependent
+ service centers, use <code>qncsconvld</code> instead.
+</p>
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>N</var></code></dt>
+</dl>
+<p> Number of requests in the system (<code><var>N</var>&gt;0</code>).
+</p>
+ </dd>
+<dt> <code><var>S</var>(k)</code></dt>
+</dl>
+<p> average service time on center <math>k</math> (<code><var>S</var>(k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>V</var>(k)</code></dt>
+</dl>
+<p> visit count of service center <math>k</math> (<code><var>V</var>(k) &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>m</var>(k)</code></dt>
+</dl>
+<p> number of servers at center <math>k</math>. If <code><var>m</var>(k) &lt; 1</code>,
+ center <math>k</math> is a delay center (IS); if <code><var>m</var>(k) &ge;
+ 1</code>, center <math>k</math> it is a regular <math>M/M/m</math> queueing center
+ with <code><var>m</var>(k)</code> identical servers. Default is
+ <code><var>m</var>(k) = 1</code> for all <math>k</math>.
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUT</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>U</var>(k)</code></dt>
+</dl>
+<p> center <math>k</math> utilization.
+ For IS nodes, <code><var>U</var>(k)</code> is the <math>traffic intensity</math>
+ <code><var>X</var>(k) * <var>S</var>(k)</code>.
+</p>
+ </dd>
+<dt> <code><var>R</var>(k)</code></dt>
+</dl>
+<p> average response time of center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>Q</var>(k)</code></dt>
+</dl>
+<p> average number of customers at center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>X</var>(k)</code></dt>
+</dl>
+<p> throughput of center <math>k</math>.
+</p>
+ </dd>
+<dt> <code><var>G</var>(n)</code></dt>
+</dl>
+<p> Vector of normalization constants. <code><var>G</var>(n+1)</code> contains the value of
+ the normalization constant with <math>n</math> requests
+ <math>G(n)</math>, <math>n=0, &hellip;, N</math>.
+</p>
+</dd>
+</dl>
+
+<p> <strong>NOTE</strong>
+</p>
+<p> For a network with <math>K</math> service centers and <math>N</math> requests,
+ this implementation of the convolution algorithm has time and space
+ complexity <math>O(NK)</math>.
+</p>
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ Jeffrey P. Buzen, <cite>Computational Algorithms for Closed Queueing
+ Networks with Exponential Servers</cite>, Communications of the ACM, volume
+ 16, number 9, September 1973,
+ pp. 527&ndash;531. <a href="http://doi.acm.org/10.1145/362342.362345">10.1145/362342.362345</a>
+ </li></ul>
+
+<p> This implementation is based on G. Bolch, S. Greiner, H. de Meer and
+ K. Trivedi, <cite>Queueing Networks and Markov Chains: Modeling and
+ Performance Evaluation with Computer Science Applications</cite>, Wiley,
+ 1998, pp. 313&ndash;317.
+</p>
+<p> <strong>See also: </strong>
+  <a href="qncsconvld.html">qncsconvld</a>
+</p>
+</div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ n = [1 2 0];
+ N = sum(n); # Total population size
+ S = [ 1/0.8 1/0.6 1/0.4 ];
+ m = [ 2 3 1 ];
+ V = [ 1 .667 .2 ];
+ [U R Q X G] = qncsconv( N, S, V, m );
+ p = [0 0 0]; # initialize p
+ # Compute the probability to have n(k) jobs at service center k
+ for k=1:3
+   p(k) = (V(k)*S(k))^n(k) / G(N+1) * ...
+          (G(N-n(k)+1) - V(k)*S(k)*G(N-n(k)) );
+   printf("Prob( n(%d) = %d )=%f\n", k, n(k), p(k) );
+ endfor
+
+Prob( n(1) = 1 )=0.179750
+Prob( n(2) = 2 )=0.484043
+Prob( n(3) = 0 )=0.527791
+                    </pre></td></tr></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

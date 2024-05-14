@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qnmknode</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qnmknode</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> <var>Q</var> = <b>qnmknode</b><i> (<var>&quot;m/m/m-fcfs&quot;</var>, <var>S</var>)</i></dt>
+<dt><u>Function File:</u> <var>Q</var> = <b>qnmknode</b><i> (<var>&quot;m/m/m-fcfs&quot;</var>, <var>S</var>, <var>m</var>)</i></dt>
+<dt><u>Function File:</u> <var>Q</var> = <b>qnmknode</b><i> (<var>&quot;m/m/1-lcfs-pr&quot;</var>, <var>S</var>)</i></dt>
+<dt><u>Function File:</u> <var>Q</var> = <b>qnmknode</b><i> (<var>&quot;-/g/1-ps&quot;</var>, <var>S</var>)</i></dt>
+<dt><u>Function File:</u> <var>Q</var> = <b>qnmknode</b><i> (<var>&quot;-/g/1-ps&quot;</var>, <var>S</var>, <var>s2</var>)</i></dt>
+<dt><u>Function File:</u> <var>Q</var> = <b>qnmknode</b><i> (<var>&quot;-/g/inf&quot;</var>, <var>S</var>)</i></dt>
+<dt><u>Function File:</u> <var>Q</var> = <b>qnmknode</b><i> (<var>&quot;-/g/inf&quot;</var>, <var>S</var>, <var>s2</var>)</i></dt>
+</dl>
+
+<p> Creates a node; this function can be used together with
+ <code>qnsolve</code>. It is possible to create either single-class nodes
+ (where there is only one customer class), or multiple-class nodes
+ (where the service time is given per-class). Furthermore, it is
+ possible to specify load-dependent service times. String literals
+ are case-insensitive, so for example <var>&quot;-/g/inf&quot;</var>, <var>&quot;-/G/inf&quot;</var>
+ and <var>&quot;-/g/INF&quot;</var> are all equivalent.
+</p>
+<div class="ms-5">
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>S</var></code></dt>
+</dl>
+<p> Mean service time.
+</p>
+ <ul>
+<li> If <math>S</math> is a scalar,
+ it is assumed to be a load-independent, class-independent service time.
+
+ </li><li> If <math>S</math> is a column vector, then <code><var>S</var>(c)</code> is assumed to
+ the the load-independent service time for class <math>c</math> customers.
+
+ </li><li> If <math>S</math> is a row vector, then <code><var>S</var>(n)</code> is assumed to be
+ the class-independent service time at the node, when there are <math>n</math>
+ requests.
+
+ </li><li> Finally, if <var>S</var> is a two-dimensional matrix, then
+ <code><var>S</var>(c,n)</code> is assumed to be the class <math>c</math> service time
+ when there are <math>n</math> requests at the node.
+
+</li></ul>
+
+ </dd>
+<dt> <code><var>m</var></code></dt>
+</dl>
+<p> Number of identical servers at the node. Default is <code><var>m</var>=1</code>.
+</p>
+ </dd>
+<dt> <code><var>s2</var></code></dt>
+</dl>
+<p> Squared coefficient of variation for the service time. Default is 1.0.
+</p>
+</dd>
+</dl>
+
+<p> The returned struct <var>Q</var> should be considered opaque to the client.
+</p>
+ 
+ 
+    
+    
+  
+  
+ 
+<p> <strong>See also: </strong>
+  <a href="qnsolve.html">qnsolve</a>
+</p>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

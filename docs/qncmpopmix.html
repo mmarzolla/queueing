@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Octave package for Queueing Networks and Markov chains analysis: qncmpopmix</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <style>
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/queueing.png" alt="queueing" class="d-inline-block align-top" width="25" height="25">
+              Octave package for Queueing Networks and Markov chains analysis
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Queueing Networks">
+                    <i class="fas fa-list-alt"></i>
+                    Queueing Networks
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+              <h3 class="d-inline-block mr-2">
+              Function&nbsp;Reference: <b><code>qncmpopmix</code></b>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+<dl>
+<dt><u>Function File:</u> pop_mix = <b>qncmpopmix</b><i> (<var>k</var>, <var>N</var>)</i></dt>
+</dl>
+
+ <a name="index-population-mix"></a>
+ <a name="index-closed-network_002c-multiple-classes"></a>
+
+<p> Return the set of population mixes for a closed multiclass queueing
+ network with exactly <var>k</var> customers. Specifically, given a
+ closed multiclass QN with <math>C</math> customer classes, where there
+ are <code><var>N</var>(c)</code> class <math>c</math> requests, <math>c = 1, &hellip;, C</math>
+ a <math>k</math>-mix <math>M</math> is a vector of length <math>C</math> with the following
+ properties:
+</p>
+<div class="ms-5">
+ <ul>
+<li> <math>0 &le; M_c &le; <var>N</var>(c)</math> for all <math>c = 1, &hellip;, C</math>;
+ </li><li> <math>\sum_c=1^C M_c = k</math>
+ </li></ul>
+
+<p> In other words, a <math>k</math>-mix is an allocation of <math>k</math>
+ requests to <math>C</math> classes such that the number of requests
+ assigned to class <math>c</math> does not exceed the maximum value
+ <code><var>N</var>(c)</code>.
+</p>
+<p> <var>pop_mix</var> is a matrix with <math>C</math> columns, such
+ that each row represents a valid mix.
+</p>
+<p> <strong>INPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>k</var></code></dt>
+</dl>
+<p> Size of the requested mix (scalar, <code><var>k</var> &ge; 0</code>).
+</p>
+ </dd>
+<dt> <code><var>N</var>(c)</code></dt>
+</dl>
+<p> number of class <math>c</math> requests (<code><var>k</var> &le; sum(<var>N</var>)</code>).
+</p>
+</dd>
+</dl>
+
+<p> <strong>OUTPUTS</strong>
+</p>
+ <dl compact="compact">
+<dt> <code><var>pop_mix</var>(i,c)</code></dt>
+</dl>
+<p> number of class <math>c</math> requests in the <math>i</math>-th population
+ mix. The number of mixes is <code>rows(<var>pop_mix</var>)</code>.
+</p>
+</dd>
+</dl>
+
+<p> If you are interested in the number of <math>k</math>-mixes only, you can
+ use the funcion <code>qnmvapop</code>.
+</p>
+<p> <strong>REFERENCES</strong>
+</p>
+ <ul>
+<li>
+ Herb Schwetman, <cite>Implementing the Mean Value Algorithm for the
+ Solution of Queueing Network Models</cite>, Technical Report
+ <a href="http://docs.lib.purdue.edu/cstech/286/">80-355</a>, Department of Computer
+ Sciences, Purdue University, revised February 15, 1982.
+ </li></ul>
+
+<p> The slightly different problem of enumerating all tuples <math>k_1,
+ &hellip;, k_N</math> such that <math>\sum_i k_i = k</math> and <math>k_i
+ &ge; 0</math>, for a given <math>k &ge; 0</math> has been described in
+ S. Santini, <cite>Computing the Indices for a Complex Summation</cite>,
+ unpublished report, available at
+ <a href="http://arantxa.ii.uam.es/~ssantini/writing/notes/s668_summation.pdf">http://arantxa.ii.uam.es/~ssantini/writing/notes/s668_summation.pdf</a>
+</p>
+<p> <strong>See also: </strong>
+  <a href="qncmnpop.html">qncmnpop</a>
+</p>
+</div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ N = [2 3];
+ mix = qncmpopmix(3, N)
+
+mix =
+
+   2   1
+   1   2
+   0   3
+
+                    </pre></td></tr></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
