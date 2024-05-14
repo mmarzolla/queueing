@@ -30,7 +30,7 @@ $(DOC).info: $(DOC).texi conf.texi $(CHAPTERS)
 	-$(MAKEINFO) $(DOC).texi
 
 %.texi: %.txi
-	octave-cli -p../inst/ -q munge-texi.m $< ../inst/ > $@
+	octave -p../inst/ -q munge-texi.m $< ../inst/ > $@
 
 %.png: %.fig
 	fig2dev -L png -m 3 $< $@
@@ -47,7 +47,7 @@ $(DOC).info: $(DOC).texi conf.texi $(CHAPTERS)
 	fig2dev -L eps $< $@
 
 web.eps power.eps: demo_web.m
-	octave-cli -p../inst/ -q $<
+	octave -p../inst/ -q $<
 
 %.pdf: %.eps
 	epstopdf $<

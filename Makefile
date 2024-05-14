@@ -59,7 +59,7 @@ $(DISTNAME).tar.gz $(DISTNAME).zip:
 	zip -r $(DISTNAME).zip $(PROGNAME)/
 
 $(PROGNAME)-html.tar.gz:
-	octave-cli -qf --eval "pkg install -local $(DISTNAME).tar.gz; pkg load $(PROGNAME); pkg load generate_html;  generate_package_html ('$(PROGNAME)', '$(PROGNAME)-html', 'octave-forge'); pkg uninstall $(PROGNAME)"
+	octave -qf --eval "pkg install -local $(DISTNAME).tar.gz; pkg load $(PROGNAME); pkg load generate_html;  generate_package_html ('$(PROGNAME)', '$(PROGNAME)-html', 'octave-forge'); pkg uninstall $(PROGNAME)"
 	tar cfz $(PROGNAME)-html.tar.gz $(PROGNAME)-html
 
 dist: ALL $(DISTNAME).tar.gz $(DISTNAME).zip $(PROGNAME)-html.tar.gz
