@@ -33,6 +33,7 @@ Queueing Networks
  qnclosed
  qncmmvabs
  qncmmva
+ qncmmvaap
  qncmnpop
  qncmpopmix
  qncmvisits
@@ -64,5 +65,4 @@ Bounds Analysis
  qncmcb
  qncspb
  qncsgb
- 
  
