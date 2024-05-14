@@ -1,4 +1,4 @@
-## Copyright (C) 2012, 2016 Moreno Marzolla
+## Copyright (C) 2012, 2016, 2024 Moreno Marzolla
 ##
 ## This file is part of the queueing toolbox.
 ##
@@ -14,6 +14,14 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with the queueing toolbox. If not, see <http://www.gnu.org/licenses/>
+
+## -*- texinfo -*-
+## @deftypefn  {} {} demo_web ()
+##
+## The `demo_web.m` file is inside the `doc/` directory, and is used
+## to generate an image used in the manual.
+##
+## @end deftypefn
 
 1; # not a function file
 
