@@ -38,7 +38,7 @@ distclean: clean
 	for d in $(SUBDIRS); do \
 		$(MAKE) -C $$d distclean; \
 	done
-	\rm -r -f doc/conf.texi docs/* fname DESCRIPTION $(PROGNAME)-html
+	\rm -r -f doc/conf.texi docs/* fname DESCRIPTION queueing.yaml $(PROGNAME)-html
 
 $(DISTNAME).tar.gz $(DISTNAME).zip:
 	\rm -r -f $(PROGNAME) fname
