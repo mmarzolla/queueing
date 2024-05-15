@@ -261,9 +261,9 @@
                     <td>&nbsp;</td>
                     <td><pre class="example">
 
- ## The following code produces Fig. 7 from the paper: M. Marzolla, "A GNU
- ## Octave package for Queueing Networks and Markov Chains analysis",
- ## submitted to the ACM Transactions on Mathematical Software.
+ ## The following code produces Fig. 7 from the paper: M. Marzolla,
+ ## "A Software package for Queueing Networks and Markov Chains analysis",
+ ## https://doi.org/10.48550/arXiv.2209.04220
 
  N = 300;                          # total number of jobs
  S = [100 140 200  30  50  20  10; # service demands
@@ -277,7 +277,6 @@
  Xsys = Rsys = NA(length(beta), length(beta));
 
  pop = zeros(1,rows(S));
- tic;
  for i=1:length(beta)
    for j=1:length(beta)
      pop(1) = round(beta(i)*N);
@@ -293,7 +292,6 @@
      endif
    endfor
  endfor
- toc;
  minX = min(Xsys(:));
  maxX = max(Xsys(:));
  Xnew = Xsys; Xnew(isna(Xnew)) = maxX+1;
@@ -310,7 +308,6 @@
  axis on;
  hold off;
 
-Elapsed time is 4.17429 seconds.
                     </pre></td></tr></tbody>
                   </table>
                   <div class="text-center">

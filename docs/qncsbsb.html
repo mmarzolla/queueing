@@ -155,6 +155,56 @@
   <a href="qncmbsb.html">qncmbsb</a>
 </p>
 </div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+ S = [10 7 5 4]
+ NN = 50;
+ Xl = Xu = Xmva = zeros(1,NN);
+ for n=1:NN
+   [Xl(n) Xu(n)] = qncsbsb(n,S);
+   [na na na X] = qncsmva(n,S,ones(size(S)));
+   Xmva(n) = X(1);
+ endfor
+ plot(1:NN, Xl, ":b", "linewidth", 2, ...
+      1:NN, Xu, ":b;BSB;", "linewidth", 2, ...
+      1:NN, Xmva, "k;MVA;", "linewidth", 2);
+ xlabel("N. of requests");
+ ylim([0, 0.15]);
+ title("System throughput"); legend("boxoff");
+ legend("location", "northeast");
+
+S =
+
+   10    7    5    4
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/qncsbsb_101.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         </div>
       </div>

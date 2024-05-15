@@ -180,12 +180,15 @@
 </p>
 <p> In presence of load-dependent servers (i.e., if <code><var>m</var>(k)&gt;1</code>
  for some <math>k</math>), the MVA algorithm is known to be numerically
- unstable. Generally, this issue manifests itself as negative values
- for the response times or utilizations. This is not a problem of
- the <code>queueing</code> toolbox, but of the MVA algorithm, and has
- currently no known solution. This function prints a warning if
- numerical problems are detected; the warning can be disabled with
- the command <code>warning(&quot;off&quot;, &quot;qn:numerical-instability&quot;)</code>.
+ unstable. This issue manifests itself as negative values for the
+ response times or utilizations. This is not a problem of the
+ <code>queueing</code> toolbox, but an intrinsic limitation of MVA.
+ This implementation prints a warning if numerical problems are
+ detected; the warning can be disabled with the command
+ <code>warning(&quot;off&quot;, &quot;qn:numerical-instability&quot;)</code>.
+ For product-form QNs with a single load-dependent server
+ you may want to try the Conditional MVA algorithm
+ implemented in <code>qncscmva</code>.
 </p>
 <p> <strong>REFERENCES</strong>
 </p>

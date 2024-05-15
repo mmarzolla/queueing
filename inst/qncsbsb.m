@@ -1,4 +1,4 @@
-## Copyright (C) 2008, 2009, 2010, 2011, 2012, 2016, 2018 Moreno Marzolla
+## Copyright (C) 2008, 2009, 2010, 2011, 2012, 2016, 2018, 2024 Moreno Marzolla
 ##
 ## This file is part of the queueing toolbox.
 ##
@@ -137,3 +137,20 @@ endfunction
 %!   assert( Rl <= Rs+tol );
 %!   assert( Ru >= Rs-tol );
 %! endfor
+
+%!demo
+%! S = [10 7 5 4];
+%! NN = 50;
+%! Xl = Xu = Xmva = zeros(1,NN);
+%! for n=1:NN
+%!   [Xl(n) Xu(n)] = qncsbsb(n,S);
+%!   [na na na X] = qncsmva(n,S,ones(size(S)));
+%!   Xmva(n) = X(1);
+%! endfor
+%! plot(1:NN, Xl, ":b", "linewidth", 2, ...
+%!      1:NN, Xu, ":b;BSB;", "linewidth", 2, ...
+%!      1:NN, Xmva, "k;MVA;", "linewidth", 2);
+%! xlabel("N. of requests");
+%! ylim([0, 0.15]);
+%! title("System throughput"); legend("boxoff");
+%! legend("location", "northeast");

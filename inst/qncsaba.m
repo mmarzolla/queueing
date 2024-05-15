@@ -1,4 +1,4 @@
-## Copyright (C) 2012, 2016, 2020 Moreno Marzolla
+## Copyright (C) 2012, 2016, 2020, 2024 Moreno Marzolla
 ##
 ## This file is part of the queueing toolbox.
 ##
@@ -80,6 +80,17 @@
 ##
 ## @end table
 ##
+## @strong{REFERENCES}
+##
+## @itemize
+## @item
+## Edward D. Lazowska, John Zahorjan, G.  Scott Graham, and Kenneth
+## C. Sevcik, @cite{Quantitative System Performance: Computer System
+## Analysis Using Queueing Network Models}, Prentice Hall,
+## 1984. @url{http://www.cs.washington.edu/homes/lazowska/qsp/}. In
+## particular, see section 5.2 ("Asymptotic Bounds").
+## @end itemize
+##
 ## @seealso{qncmaba}
 ##
 ## @end deftypefn
@@ -147,3 +158,20 @@ endfunction
 %!   assert( Rl <= Rs+tol );
 %!   assert( Ru >= Rs-tol );
 %! endfor
+
+%!demo
+%! S = [10 7 5 4];
+%! NN = 50;
+%! Xl = Xu = Xmva = zeros(1,NN);
+%! for n=1:NN
+%!   [Xl(n) Xu(n)] = qncsaba(n,S);
+%!   [na na na X] = qncsmva(n,S,ones(size(S)));
+%!   Xmva(n) = X(1);
+%! endfor
+%! plot(1:NN, Xl, ":b", "linewidth", 2, ...
+%!      1:NN, Xu, ":b;ABA;", "linewidth", 2, ...
+%!      1:NN, Xmva, "k;MVA;", "linewidth", 2);
+%! xlabel("N. of requests");
+%! ylim([0, 0.15]);
+%! title("System throughput"); legend("boxoff");
+%! legend("location", "northeast");
