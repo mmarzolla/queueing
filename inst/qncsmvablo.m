@@ -94,7 +94,7 @@ function [U R Q X] = qncsmvablo( K, S, M, P )
   endif
   ( isscalar(K) && K > 0 ) || ...
       error( "K must be a positive integer" );
-  isvector(S) && all(S>0) || ...
+  ( isvector(S) && all(S>0) ) || ...
       error ("S must be a vector > 0");
   S = S(:)'; # make S a row vector
   N = length(S);
@@ -108,10 +108,10 @@ function [U R Q X] = qncsmvablo( K, S, M, P )
       error( "The population size K=%d exceeds the total system capacity %d", K, sum(M) );
 
   [na err] = dtmcchkP(P);
-  ( na>0 ) || ...
+  ( na > 0 ) || ...
       error( err );
 
-  rows(P) == N || ...
+  ( rows(P) == N ) || ...
       error("The number of rows of P must be equal to the length of S");
 
   ## Note: in this implementation we make use of the same notation found
@@ -133,7 +133,7 @@ function [U R Q X] = qncsmvablo( K, S, M, P )
   ## Main loop
   for k=1:K
     do
-    ## t_bar_i(k) = S(i) *(z_i(k) + k_bar_i(k-1))+BT_i(k)
+    ## t_bar_i(k) = S(i) * (z_i(k) + k_bar_i(k-1)) + BT_i(k)
       t_bar = S .* ( z + k_bar_m1 ) + BT;
       lambda = k / dot(v,t_bar);
       k_bar = t_bar .* v * lambda;

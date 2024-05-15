@@ -1,15 +1,16 @@
-VERSIONNUM=1.2.8
-VERSIONDATE="2024-05-13"
-PROGNAME=queueing
+VERSIONNUM:=1.2.8
+VERSIONDATE:="2024-05-13"
+PROGNAME:=queueing
+SHA256SUM=
 
-DISTNAME=$(PROGNAME)-$(VERSIONNUM)
-SUBDIRS=inst doc test devel
-DISTFILES=COPYING NEWS DESCRIPTION CITATION INDEX README.md INSTALL
-DISTSUBDIRS=inst inst/private doc
+DISTNAME:=$(PROGNAME)-$(VERSIONNUM)
+SUBDIRS:=inst doc test devel
+DISTFILES:=COPYING NEWS DESCRIPTION CITATION INDEX README.md INSTALL
+DISTSUBDIRS:=inst inst/private doc
 
 .PHONY: clean check htmldocs
 
-ALL: DESCRIPTION queueing.yaml doc/conf.texi
+ALL: DESCRIPTION doc/conf.texi
 	for d in $(SUBDIRS); do \
 		$(MAKE) -C $$d $@; \
 	done
@@ -23,7 +24,8 @@ doc/conf.texi:
 	cat $< | \
 	sed "s/PROGNAME/$(PROGNAME)/g" | \
 	sed "s/VERSIONNUM/$(VERSIONNUM)/g" | \
-	sed "s/VERSIONDATE/$(VERSIONDATE)/g" > $@
+	sed "s/VERSIONDATE/$(VERSIONDATE)/g" | \
+	sed "s/SHA256SUM/$(SHA256SUM)/g"> $@
 
 check:
 	$(MAKE) -C test check
@@ -61,7 +63,10 @@ htmldocs:
 #	octave -qf --eval "pkg install -local $(DISTNAME).tar.gz; pkg load $(PROGNAME); pkg load generate_html;  generate_package_html ('$(PROGNAME)', '$(PROGNAME)-html', 'octave-forge'); pkg uninstall $(PROGNAME)"
 #	tar cfz $(PROGNAME)-html.tar.gz $(PROGNAME)-html
 
-dist: ALL $(DISTNAME).tar.gz $(DISTNAME).zip htmldocs
+queueing.yaml: queueing.yaml.in $(DISTNAME).tar.gz
+queueing.yaml: SHA256SUM=$(shell sha256sum $(DISTNAME).tar.gz | cut -d ' ' -f 1)
+
+dist: ALL $(DISTNAME).tar.gz $(DISTNAME).zip htmldocs queueing.yaml
 	sha256sum $(DISTNAME).tar.gz
 	sha256sum $(DISTNAME).zip
 

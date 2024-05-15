@@ -1,4 +1,4 @@
-## Copyright (C) 2008, 2009, 2010, 2011, 2012, 2016, 2018, 2019, 2020, 2020 Moreno Marzolla
+## Copyright (C) 2008, 2009, 2010, 2011, 2012, 2016, 2018, 2019, 2020, 2020, 2024 Moreno Marzolla
 ##
 ## This file is part of the queueing toolbox.
 ##
@@ -274,9 +274,9 @@ endfunction
 %! [U R Q X] = qncmmvabs(N,S,V,m);
 
 %!demo
-%! ## The following code produces Fig. 7 from the paper: M. Marzolla, "A GNU
-%! ## Octave package for Queueing Networks and Markov Chains analysis",
-%! ## submitted to the ACM Transactions on Mathematical Software.
+%! ## The following code produces Fig. 7 from the paper: M. Marzolla,
+%! ## "A Software package for Queueing Networks and Markov Chains analysis",
+%! ## https://doi.org/10.48550/arXiv.2209.04220
 %!
 %! N = 300;                          # total number of jobs
 %! S = [100 140 200  30  50  20  10; # service demands
@@ -290,7 +290,6 @@ endfunction
 %! Xsys = Rsys = NA(length(beta), length(beta));
 %!
 %! pop = zeros(1,rows(S));
-%! tic;
 %! for i=1:length(beta)
 %!   for j=1:length(beta)
 %!     pop(1) = round(beta(i)*N);
@@ -306,7 +305,6 @@ endfunction
 %!     endif
 %!   endfor
 %! endfor
-%! toc;
 %! minX = min(Xsys(:));
 %! maxX = max(Xsys(:));
 %! Xnew = Xsys; Xnew(isna(Xnew)) = maxX+1;

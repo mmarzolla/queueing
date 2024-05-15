@@ -38,7 +38,7 @@ maintainers:
 versions:
 - id: "VERSIONNUM"
   date: "VERSIONDATE"
-  sha256: "90919445362283e6889a78d7bbc95dcaa140243a95f9fa54cd1fa1e8e76fc333"
+  sha256: "SHA256SUM"
   url: "https://github.com/mmarzolla/queueing/releases/download/VERSIONNUM/PROGNAME-VERSIONNUM.tar.gz"
   depends:
   - "octave (>= 4.0.0)"

@@ -1,4 +1,4 @@
-## Copyright (C) 2008, 2009, 2010, 2011, 2012, 2013, 2016, 2018, 2020, 2021 Moreno Marzolla
+## Copyright (C) 2008, 2009, 2010, 2011, 2012, 2013, 2016, 2018, 2020, 2021, 2024 Moreno Marzolla
 ##
 ## This file is part of the queueing toolbox.
 ##
@@ -106,12 +106,15 @@
 ##
 ## In presence of load-dependent servers (i.e., if @code{@var{m}(k)>1}
 ## for some @math{k}), the MVA algorithm is known to be numerically
-## unstable. Generally, this issue manifests itself as negative values
-## for the response times or utilizations. This is not a problem of
-## the @code{queueing} toolbox, but of the MVA algorithm, and has
-## currently no known solution. This function prints a warning if
-## numerical problems are detected; the warning can be disabled with
-## the command @code{warning("off", "qn:numerical-instability")}.
+## unstable. This issue manifests itself as negative values for the
+## response times or utilizations. This is not a problem of the
+## @code{queueing} toolbox, but an intrinsic limitation of MVA.
+## This implementation prints a warning if numerical problems are
+## detected; the warning can be disabled with the command
+## @code{warning("off", "qn:numerical-instability")}.
+## For product-form QNs with a single load-dependent server
+## you may want to try the Conditional MVA algorithm
+## implemented in @code{qncscmva}.
 ##
 ## @strong{REFERENCES}
 ##
