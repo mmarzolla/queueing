@@ -28,33 +28,35 @@ from
    To install 'queueing', follow these steps:
 
   1. If you have a recent version of GNU Octave and a network
-     connection, you can install 'queueing' from Octave command prompt
-     using this command:
+     connection, you can install 'queueing' from the Octave command
+     prompt using this command:
 
-          octave:1> pkg install pkg install "https://github.com/mmarzolla/queueing/releases/download/1.2.8/queueing-1.2.8.tar.gz"
+          octave:1> pkg install -forge queueing"
 
-     The command above will download and install the latest version of
-     the 'queueing' package from the source repository, and install it
-     on your machine.
+     The command above downloads the latest version of the 'queueing'
+     package from Octave Forge and installs it on your machine.  You can
+     also fetch directly from the source code repository:
+
+          octave:1> pkg install "https://github.com/mmarzolla/queueing/releases/download/1.2.8/queueing-1.2.8.tar.gz"
 
      If you do not have root access, you can perform a local install
      with:
 
-          octave:1> pkg install -local "https://github.com/mmarzolla/queueing/releases/download/1.2.8/queueing-1.2.8.tar.gz"
+          octave:1> pkg install -local -forge queueing
 
-     This will install 'queueing' in your home directory, and the
-     package will be available to the current user only.
+     This installs 'queueing' in your home directory, and the package
+     will be available to the current user only.
 
-  2. Alternatively, you can first download the 'queueing' tarball; to
-     install the package in the system-wide location issue this command
-     at the Octave prompt:
+  2. Alternatively, you can first download the 'queueing' tarball from
+     the url
+     <https://github.com/mmarzolla/queueing/releases/download/1.2.8/queueing-1.2.8.tar.gz>.
+     To install the package system-wide, issue this command at the
+     Octave prompt:
 
-          octave:1> pkg install _queueing-1.2.8.tar.gz_
+          octave:1> pkg install queueing-1.2.8.tar.gz
 
-     (you may need to start Octave as root in order to allow the
-     installation to copy the files to the target locations).  After
-     this, all functions will be available each time Octave starts,
-     without the need to tweak the search path.
+     (you may need to start Octave as root to allow the installation to
+     copy the files to the target locations).
 
      If you do not have root access, you can do a local install using:
 
@@ -65,19 +67,20 @@ from
      something like:
 
           octave:1>pkg list queueing
-          Package Name  | Version | Installation directory
-          --------------+---------+-----------------------
-              queueing  |   1.2.8 | /home/moreno/octave/queueing-1.2.8
+
+          -| Package Name  | Version | Installation directory
+          -| --------------+---------+-----------------------
+          -|     queueing  |   1.2.8 | /home/moreno/octave/queueing-1.2.8
 
   4. Starting from version 1.1.1, 'queueing' is no longer automatically
-     loaded on Octave start.  To make the functions available for use,
-     you need to issue the command
+     loaded at startup.  To make the functions available for use, you
+     need to issue the following command at the Octave prompt:
 
-          octave:1>pkg load queueing
+          octave:1> pkg load queueing
 
-     at the Octave prompt.  To automatically load 'queueing' each time
-     Octave starts, you can add the command above to the startup script
-     (usually, '~/.octaverc' on Unix systems).
+     To automatically load 'queueing' each time Octave starts, add the
+     command above to the startup script (usually, '~/.octaverc' on Unix
+     systems).
 
   5. To completely remove 'queueing' from your system, use the 'pkg
      uninstall' command:
@@ -88,28 +91,25 @@ from
 =======================
 
 If you want to manually install 'queueing' in a custom location, you can
-download the tarball and unpack it somewhere:
+download the tarball, unpack it and copy all '.m' files from the 'inst/'
+directory to some target location, e.g., '/path/to/queueing/':
 
+     curl "https://github.com/mmarzolla/queueing/releases/download/1.2.8/queueing-1.2.8.tar.gz"
      tar xvfz queueing-1.2.8.tar.gz
-     cd queueing/
+     cd queueing/inst/
+     cp -r *.m /path/to/queueing/
 
-   Copy all '.m' files from the 'inst/' directory to some target
-location.  Then, start Octave with the '-p' option to add the target
-location to the search path, so that Octave will find all 'queueing'
-functions automatically:
+   Then, start Octave with the '-p' option to add the target location to
+the search path, so that Octave will find all 'queueing' functions
+automatically:
 
-     octave -p _/path/to/queueing_
-
-   For example, if all 'queueing' m-files are in '/usr/local/queueing',
-you can start Octave as follows:
-
-     octave -p _/usr/local/queueing_
+     octave -p _/path/to/queueing/_
 
    If you want, you can add the following line to '~/.octaverc':
 
-     addpath("_/path/to/queueing_");
+     addpath("_/path/to/queueing/_");
 
-so that the path '/path/to/queueing' is automatically added to the
+so that the path '/path/to/queueing/' is automatically added to the
 search path each time Octave is started, and you no longer need to
 specify the '-p' option on the command line.
 
