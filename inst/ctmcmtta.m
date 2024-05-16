@@ -126,8 +126,11 @@ endfunction
 %! Q = ctmcbd(birth,death);
 %! t = ctmcmtta(Q,[0 0 0 1])
 
+## Birth-death process with N states; states 1 and N
+## are absorbing. Plot the MTTA as a function of the
+## initial state.
 %!demo
-%! N = 100;
+%! N = 50;
 %! birth = death = ones(1,N-1); birth(1) = death(N-1) = 0;
 %! Q = diag(birth,1)+diag(death,-1);
 %! Q -= diag(sum(Q,2));
@@ -138,5 +141,6 @@ endfunction
 %!   t(i) = ctmcmtta(Q,p);
 %! endfor
 %! plot(initial_state,t,"+");
+%! title(sprintf("Birth-Death process, %d states, absorbing states=1,%d",N,N));
 %! xlabel("Initial state");
 %! ylabel("MTTA");

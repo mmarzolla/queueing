@@ -197,25 +197,10 @@ endfunction
 %! endfor
 %! Pstar = P;
 %! ## setup snakes and ladders
-%! SL = [1 38; ...
-%!       4 14; ...
-%!       9 31; ...
-%!       16 6; ...
-%!       21 42; ...
-%!       28 84; ...
-%!       36 44; ...
-%!       47 26; ...
-%!       49 11; ...
-%!       51 67; ...
-%!       56 53; ...
-%!       62 19; ...
-%!       64 60; ...
-%!       71 91; ...
-%!       80 100; ...
-%!       87 24; ...
-%!       93 73; ...
-%!       95 75; ...
-%!       98 78 ];
+%! SL = [ 1 38;   4 14;   9 31;  16  6;  21 42; ...
+%!       28 84;  36 44;  47 26;  49 11;  51 67; ...
+%!       56 53;  62 19;  64 60;  71 91;  80 100; ...
+%!       87 24;  93 73;  95 75;  98 78 ];
 %! for ii=1:rows(SL);
 %!   i = SL(ii,1);
 %!   j = SL(ii,2);
@@ -230,15 +215,15 @@ endfunction
 %! Pstar += diag( 1-sum(Pstar,2) );
 %! # spy(Pstar); pause
 %! nsteps = 250; # number of steps
-%! Pfinish = zeros(1,nsteps); # Pfinish(i) = probability of finishing after step i
+%! Pf = zeros(1,nsteps); # Pf(i) = prob. of finishing after step i
 %! pstart = zeros(1,101); pstart(1) = 1; pn = pstart;
 %! for i=1:nsteps
 %!   pn = pn*Pstar;
-%!   Pfinish(i) = pn(101); # state 101 is the ending (absorbing) state
+%!   Pf(i) = pn(101); # state 101 is the ending (absorbing) state
 %! endfor
 %! f = dtmcmtta(Pstar,pstart);
-%! printf("Average number of steps to complete 'snakes and ladders': %f\n", f );
-%! plot(Pfinish,"linewidth",2);
+%! printf("Average n. of steps to complete 'snakes and ladders': %f\n", f );
+%! plot(Pf,"linewidth",2);
 %! line([f,f],[0,1]);
 %! text(f*1.1,0.2,["Mean Time to Absorption (" num2str(f) ")"]);
 %! xlabel("Step number (n)");
@@ -258,3 +243,22 @@ endfunction
 %! P(9,[6 8]) = .5;
 %! t = dtmcmtta(P);
 %! assert( t, [6 5 6 5 0 5 6 5 6], 10*eps );
+
+## Birth-death process with N states; states 1 and N
+## are absorbing. Plot the MTTA as a function of the
+## initial state.
+%!demo
+%! N = 50;
+%! birth = death = 0.5*ones(1,N-1); birth(1) = death(N-1) = 0;
+%! P = diag(birth,1)+diag(death,-1);
+%! P = P + eye(N) - diag(sum(P,2));
+%! t = zeros(1,N/2);
+%! initial_state = 1:(N/2);
+%! for i=initial_state
+%!   p = zeros(1,N); p(i) = 1;
+%!   t(i) = dtmcmtta(P,p);
+%! endfor
+%! plot(initial_state,t,"+");
+%! title(sprintf("Birth-Death process, %d states, absorbing states=1,%d",N,N));
+%! xlabel("Initial state");
+%! ylabel("MTTA");

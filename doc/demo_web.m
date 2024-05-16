@@ -25,8 +25,6 @@
 
 1; # not a function file
 
-# figure (1, "visible", "off"); # do not show plot window
-
 page_screen_output(0); # avoid output pagination
 
 N = 100; # total population size
@@ -71,7 +69,7 @@ axis(ax);
 legend("location", "south", "orientation", "horizontal"); legend("boxoff");
 xlabel("Class 1 population mix");
 ylabel("Response Time");
-print("web.eps", "-deps2", "-mono", "-tight");
+print("web.eps", "-depsc2", "-tight");
 
 clf;
 
@@ -88,6 +86,6 @@ legend("location","south", "orientation", "horizontal"); legend("boxoff");
 xlabel("Class 1 population mix");
 ylabel("Power");
 title("Power as a function of the population mix");
-print("power.eps", "-deps2", "-mono", "-tight");
+print("power.eps", "-depsc2", "-tight");
 
 

@@ -344,6 +344,45 @@ $$ {\bf B} = {\bf N R} $$
 
 @GETHELP{dtmcmtta}
 
+@noindent @strong{EXAMPLE}
+
+@emph{Snakes and Ladders} is a board game that originated in ancient
+India. The game is played by two players that obey the same rules, and
+whose progress is entirely determined by chance. Therefore, we can
+restrict ourselves to the case of a single player.
+
+@float Figure,fig:snakes_and_ladders_board
+@center @image{snakes_and_ladders_board}
+@caption{Board of the Snakes and Ladders game. Green arrows are ladders;
+red arrows are snakes.}
+@end float
+
+The board has @math{10 \times 10} squares numbered from 1 to 100; an
+additional square 0 is the starting position of the player, and is
+never visited again (Figure @ref{fig:snakes_and_ladders_board}). The
+board contains @emph{snakes} and @emph{ladders}. At each turn, the
+player rolls a dice and advances a placeholder by as many squares as
+indicated by the dice. If the landing position corresponds to the base
+of a ladder, then the placeholder is immediately moved to the top of
+the ladder. If the landing position corresponds to the head of a
+snake, then the placeholder is immediately moved to the bottom of the
+tail of the snake.
+
+For example, if the current position is 25 and the dice is three, then
+the placeholder should move to square 28 that is the bottom of a
+ladder, and therefore the final position is square 84. If the current
+position is 91 and the dice is two, then the placeholder should move to
+square 93 which is the head of a snake, so the final position is 73.
+
+@example
+@GETDEMO{dtmcmtta,1}
+@end example
+
+@float Figure,fig:snakes_and_ladders
+@center @image{snakes_and_ladders}
+@caption{Probability of completing Snakes and Ladders in at most @math{n} steps}
+@end float
+
 @c
 @node First passage times (DTMC)
 @subsection First Passage Times

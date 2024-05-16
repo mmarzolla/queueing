@@ -181,7 +181,7 @@ t = 78.333
                     <td>&nbsp;</td>
                     <td><pre class="example">
 
- N = 100;
+ N = 50;
  birth = death = ones(1,N-1); birth(1) = death(N-1) = 0;
  Q = diag(birth,1)+diag(death,-1);
  Q -= diag(sum(Q,2));
@@ -192,6 +192,7 @@ t = 78.333
    t(i) = ctmcmtta(Q,p);
  endfor
  plot(initial_state,t,"+");
+ title(sprintf("Birth-Death process, %d states, absorbing states=1,%d",N,N));
  xlabel("Initial state");
  ylabel("MTTA");
 
