@@ -6,7 +6,6 @@ FIGS_PDF=$(FIGS:%=%.pdf)
 FIGS_PNG=$(FIGS:%=%.png)
 FIGS_TO_REMOVE=$(filter-out $(FIGS_EPS) $(FIGS_PDF) $(FIGS_PNG), snakes_and_ladders_board.eps)
 DISTFILES=demo_web.m conf.texi $(DOC).pdf $(DOC).html $(DOC).texi $(CHAPTERS) $(FIGS_PDF) $(FIGS_PNG) $(wildcard *.fig)
-## The following files will not be removed by "make clean" or "make distclean"
 
 .PHONY: clean dist
 
