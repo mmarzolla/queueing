@@ -1,4 +1,4 @@
-## Copyright (C) 2012, 2016, 2024 Moreno Marzolla
+## Copyright (C) 2024 Moreno Marzolla
 ##
 ## This file is part of the queueing toolbox.
 ##
@@ -13,19 +13,23 @@
 ## General Public License for more details.
 ##
 ## You should have received a copy of the GNU General Public License
-## along with the queueing toolbox. If not, see <http://www.gnu.org/licenses/>
+## along with the queueing toolbox. If not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {} {} demo_web ()
+## @deftypefn  {} {} queueingnetworks_figures ()
 ##
-## The `demo_web.m` file is inside the `doc/` directory, and is used
-## to generate an image used in the manual.
+## The `queueingnetworks_figures.m` file is inside the `doc/` directory,
+## and is used to generate images used in the manual.
 ##
 ## @end deftypefn
 
 1; # not a function file
 
 page_screen_output(0); # avoid output pagination
+
+##
+## Web-server demo
+##
 
 N = 100; # total population size
 beta = linspace(0.1,0.9,18); # population mix for class 1
@@ -88,4 +92,11 @@ ylabel("Power");
 title("Power as a function of the population mix");
 print("power.eps", "-depsc2", "-tight");
 
+##
+## Bounds demo
+##
 
+clf;
+
+demo("qncmmva", 4); # multiclass bounds
+print("qncmmva_bounds.eps", "-depsc2", "-tight");

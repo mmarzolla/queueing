@@ -1387,3 +1387,32 @@ X =
    12.6089    8.8262    2.5218
     6.3044    1.8913    3.1522
 @end example
+
+Analyzing multiclass QNs using the MVA algorithm is computationally
+demanding. For a network with @math{K} service centers, @math{C}
+customer classes and population vector @math{(N_1, @dots{}, N_C)}, the
+MVA algorithm requires time @math{O \left( CK \prod_{c=1}^C (N_c + 1)
+\right)} and space @math{ O\left( K \prod_{c=1}^C (N_c + 1) \right)}.
+
+Approximate algorithms based on the MVA exist; however, in some cases
+one might be interested in the limiting behavior of a multiclass
+QN. In these cases it is possible to compute bounds on throughputs and
+response times using various bounding techniques.
+
+The following program considers a two-class, four-nodes QN and
+compares the per-class throughput and response times computed using
+MVA with @emph{asymptotic bounds} (@pxref{doc-qncmaba}),
+@emph{balanced system bounds} (@pxref{doc-qncmbsb}) and
+@emph{composite bounds} (@pxref{doc-qncmcb}).
+
+@example
+@GETDEMO{qncmmva,4}
+@end example
+
+The program produces the following figure:
+
+@float Figure,fig:qncmmva_bounds
+@center @image{qncmmva_bounds,5in}
+@caption{Comparison of various bounds for multiclass networks.}
+@end float
+

@@ -894,7 +894,8 @@ endfunction
 %! S = [10 7 5 4;
 %!      5  2 4 6];
 %! NN = 100;
-%! Xl_aba = Xu_aba = Xl_bsb = Xu_bsb = Xl_cb = Xu_cb = Xmva = Rmva = zeros(NN,2);
+%! Xl_aba = Xu_aba = Xl_bsb = Xu_bsb = Xl_cb = Xu_cb = ...
+%! Xmva = Rmva = zeros(NN,2);
 %! for n=1:NN
 %!   N=[n,10];
 %!   [a b] = qncmaba(N,S);
@@ -907,21 +908,21 @@ endfunction
 %!   Xmva(n,:) = X(:,1)';
 %! endfor
 %! subplot(1,2,1);
-%! plot(1:NN, Xl_aba(:,1), "--k",
-%!      1:NN, Xu_aba(:,1), "--k;ABA;",
-%!      1:NN, Xu_bsb(:,1), ":k;BSB;",
-%!      1:NN, Xl_cb(:,1), "-.k",
-%!      1:NN, Xu_cb(:,1), "-.k;CB;",
-%!      1:NN, Xmva(:,1), "k;MVA;", "linewidth", 2);
+%! plot(1:NN, Xl_aba(:,1), "-g",
+%!      1:NN, Xu_aba(:,1), "-g;ABA;",
+%!      1:NN, Xu_bsb(:,1), "-r;BSB;",
+%!      1:NN, Xl_cb(:,1), "-b",
+%!      1:NN, Xu_cb(:,1), "-b;CB;",
+%!      1:NN, Xmva(:,1), "-k;MVA;", "linewidth", 2);
 %! xlabel("N. of requests");
 %! ylim([0, 0.2]);
 %! title("Class 1 throughput"); legend("boxoff");
 %! subplot(1,2,2);
-%! plot(1:NN, Xl_aba(:,2), "--k",
-%!      1:NN, Xu_aba(:,2), "--k;ABA;",
-%!      1:NN, Xu_bsb(:,2), ":k;BSB;",
-%!      1:NN, Xl_cb(:,2), "-.k",
-%!      1:NN, Xu_cb(:,2), "-.k;CB;",
+%! plot(1:NN, Xl_aba(:,2), "-g",
+%!      1:NN, Xu_aba(:,2), "-g;ABA;",
+%!      1:NN, Xu_bsb(:,2), "-r;BSB;",
+%!      1:NN, Xl_cb(:,2), "-b",
+%!      1:NN, Xu_cb(:,2), "-b;CB;",
 %!      1:NN, Xmva(:,2), "-k;MVA;", "linewidth", 2);
 %! xlabel("N. of requests");
 %! ylim([0, 0.2]);

@@ -1,6 +1,6 @@
 DOC=queueing
 CHAPTERS=$(patsubst %.txi, %.texi, $(wildcard *.txi))
-FIGS=qn_open_single qn_closed_single qn_web_model qn_closed_multi web power qn_closed_multi_apl qn_closed_multi_cs snakes_and_ladders snakes_and_ladders_board
+FIGS=qn_open_single qn_closed_single qn_web_model qn_closed_multi web power qn_closed_multi_apl qn_closed_multi_cs snakes_and_ladders snakes_and_ladders_board ctmcexps_1 qncmmva_bounds
 FIGS_EPS=$(FIGS:%=%.eps)
 FIGS_PDF=$(FIGS:%=%.pdf)
 FIGS_PNG=$(FIGS:%=%.png)
@@ -47,10 +47,10 @@ $(DOC).info: $(DOC).texi conf.texi $(CHAPTERS)
 %.eps: %.fig
 	fig2dev -L eps $< $@
 
-web.eps power.eps: demo_web.m
+snakes_and_ladders.eps ctmcexps_1.eps: markovchains_figures.m
 	octave -p../inst/ -q $<
 
-snakes_and_ladders.eps: markovchains_figures.m
+web.eps power.eps qncmmva_bounds.eps: queueingnetworks_figures.m
 	octave -p../inst/ -q $<
 
 %.pdf: %.eps

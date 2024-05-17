@@ -374,9 +374,28 @@ ladder, and therefore the final position is square 84. If the current
 position is 91 and the dice is two, then the placeholder should move to
 square 93 which is the head of a snake, so the final position is 73.
 
+To win the game it is necessary to land on square 100; it is not
+possible to move past square 100, so for example if the player is on
+square 97 and the dice is 6, the placeholder does not move.
+
+The evolution of the game can be modeled as a DTMC with state space
+@math{@{0, @dots{}, 100@}}, where state 100 is absorbing.  The
+following GNU Octave program builds the transition matrix @math{\bf
+P^*} and computes the mean-time to absorption; this corresponds to the
+mean number of moves that are required to win the game. Moreover, the
+program computes the probabilities of reach state 100 in at most
+@math{n} moves, for increasing values of @math{n}.
+
 @example
 @GETDEMO{dtmcmtta,1}
+@result {} Average n. of steps to complete: 39.225122
 @end example
+
+Figure @ref{fig:snakes_and_ladders} shows the probability of
+completing the game in at most @math{n} steps, as a function of
+@math{n}. 39.225122 moves are required on average to complete the game;
+this is the mean time to absorption of the DTMC whose transition
+matrix is @math{\bf P^*}.
 
 @float Figure,fig:snakes_and_ladders
 @center @image{snakes_and_ladders}
@@ -686,6 +705,12 @@ state @math{i}, given initial occupancy probabilities @math{{\bf
 @GETDEMO{ctmcexps,1}
 @end group
 @end example
+
+which produces the following figure
+
+@float Figure,fig:ctmcexps_1
+@center @image{ctmcexps_1}
+@end float
 
 @c
 @c

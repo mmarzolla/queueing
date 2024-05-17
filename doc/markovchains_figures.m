@@ -27,3 +27,6 @@
 
 demo("dtmcmtta", 1); # snakes and ladders
 print("snakes_and_ladders.eps", "-depsc2", "-tight");
+
+demo("ctmcexps", 1);
+print("ctmcexps_1.eps", "-depsc2", "-tight");

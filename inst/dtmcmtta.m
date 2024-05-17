@@ -222,7 +222,7 @@ endfunction
 %!   Pf(i) = pn(101); # state 101 is the ending (absorbing) state
 %! endfor
 %! f = dtmcmtta(Pstar,pstart);
-%! printf("Average n. of steps to complete 'snakes and ladders': %f\n", f );
+%! printf("Average n. of steps to complete: %f\n", f );
 %! plot(Pf,"linewidth",2);
 %! line([f,f],[0,1]);
 %! text(f*1.1,0.2,["Mean Time to Absorption (" num2str(f) ")"]);
